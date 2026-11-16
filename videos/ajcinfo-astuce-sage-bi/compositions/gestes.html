@@ -1,0 +1,557 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      color: var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    #ge-cam {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+    #ge-stub {
+      position: absolute;
+      left: 500px;
+      top: -80px;
+      width: 80px;
+      height: 330px;
+      overflow: visible;
+    }
+    #ge-plug {
+      position: absolute;
+      left: 512px;
+      top: 236px;
+      width: 56px;
+      height: 32px;
+      background: var(--color-navy, #05355e);
+      border: 3px solid #111111;
+      border-radius: 6px;
+    }
+    #ge-win {
+      position: absolute;
+      left: 60px;
+      top: 270px;
+      width: 840px;
+      height: 1500px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 22px;
+      box-shadow: 10px 12px 0 var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    .ge-titlebar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 84px;
+      background: var(--color-navy, #05355e);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 34px;
+      line-height: 84px;
+      padding-left: 92px;
+    }
+    .ge-fileicon {
+      position: absolute;
+      left: 30px;
+      top: 21px;
+      width: 42px;
+      height: 42px;
+      border: 3px solid #ffffff;
+      border-radius: 8px;
+      background-image:
+        linear-gradient(#ffffff 3px, transparent 3px),
+        linear-gradient(90deg, #ffffff 3px, transparent 3px);
+      background-size:
+        100% 12px,
+        12px 100%;
+      background-position:
+        0 10px,
+        10px 0;
+    }
+    .ge-tabs {
+      position: absolute;
+      left: 0;
+      top: 84px;
+      width: 100%;
+      height: 76px;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .ge-tab {
+      position: absolute;
+      top: 0;
+      height: 76px;
+      line-height: 74px;
+      font-weight: 700;
+      font-size: 30px;
+      color: #5b6b7a;
+      white-space: nowrap;
+    }
+    .ge-underline {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--color-teal, #469d98);
+    }
+    .ge-toolrow {
+      position: absolute;
+      left: 0;
+      top: 160px;
+      width: 100%;
+      height: 92px;
+      background: #f4f6f8;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .ge-btn {
+      position: absolute;
+      top: 14px;
+      height: 64px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 58px;
+      white-space: nowrap;
+      padding: 0 20px 0 66px;
+    }
+    .ge-btn svg {
+      position: absolute;
+      left: 16px;
+      top: 9px;
+      width: 40px;
+      height: 40px;
+      overflow: visible;
+    }
+    .ge-titlebar .ge-chip {
+      position: absolute;
+      left: 560px;
+      top: 22px;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 700;
+      font-size: 28px;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .ge-colhead {
+      position: absolute;
+      left: 0;
+      top: 252px;
+      width: 100%;
+      height: 44px;
+      background: #f4f6f8;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .ge-col {
+      position: absolute;
+      top: 0;
+      width: 167px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 26px;
+      color: #8a96a3;
+    }
+    .ge-body {
+      position: absolute;
+      left: 0;
+      top: 296px;
+      width: 100%;
+      height: 1198px;
+      background-image:
+        linear-gradient(#e3e8ed 2px, transparent 2px),
+        linear-gradient(90deg, #e3e8ed 2px, transparent 2px);
+      background-size:
+        100% 65px,
+        167px 100%;
+      background-position:
+        0 63px,
+        165px 0;
+    }
+    #ge-rows {
+      position: absolute;
+      left: 0;
+      top: 296px;
+      width: 834px;
+      height: 520px;
+    }
+    .ge-row {
+      position: absolute;
+      left: 0;
+      width: 834px;
+      height: 130px;
+    }
+    .ge-label {
+      position: absolute;
+      left: 34px;
+      top: 40px;
+      font-weight: 700;
+      font-size: 42px;
+      line-height: 52px;
+      white-space: nowrap;
+    }
+    .ge-value {
+      position: absolute;
+      left: 400px;
+      top: 26px;
+      width: 400px;
+      text-align: right;
+      font-weight: 900;
+      font-size: 72px;
+      line-height: 80px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    #ge-note {
+      position: absolute;
+      left: 34px;
+      top: 828px;
+      font-weight: 400;
+      font-size: 28px;
+      color: #5b6b7a;
+      white-space: nowrap;
+    }
+    #ge-sel {
+      position: absolute;
+      left: 10px;
+      top: 300px;
+      width: 814px;
+      height: 512px;
+      border: 5px solid var(--color-teal, #469d98);
+      border-radius: 6px;
+      background: rgba(70, 157, 152, 0.14);
+    }
+    .ge-tile {
+      position: absolute;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 16px;
+      box-shadow: 6px 8px 0 var(--color-navy, #05355e);
+    }
+    .ge-t-label {
+      position: absolute;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+      white-space: nowrap;
+    }
+    .ge-roll {
+      position: absolute;
+      overflow: hidden;
+      white-space: nowrap;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+    .ge-roll-in {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    .ge-new {
+      color: var(--color-teal, #469d98);
+    }
+    .ge-bar {
+      position: absolute;
+      width: 40px;
+      background: var(--color-navy, #05355e);
+      border: 3px solid #111111;
+      border-radius: 6px 6px 0 0;
+    }
+    .ge-month {
+      position: absolute;
+      top: 828px;
+      width: 40px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      color: #5b6b7a;
+    }
+    .ge-packet {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      background: var(--color-teal, #469d98);
+      border: 3px solid #111111;
+      border-radius: 7px;
+    }
+    .cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 120px;
+      height: 120px;
+      z-index: 20;
+      pointer-events: none;
+      filter: drop-shadow(4px 5px 0 rgba(5, 53, 94, 0.35));
+    }
+  </style>
+  <div id="root" data-composition-id="gestes" data-width="1080" data-height="1920">
+    <div id="ge-cam" data-layout-allow-overflow>
+      <svg id="ge-stub" viewBox="0 0 80 330">
+        <line x1="40" y1="0" x2="40" y2="310" stroke="#111111" stroke-width="30" stroke-linecap="round" />
+        <line x1="40" y1="0" x2="40" y2="310" stroke="#05355e" stroke-width="22" stroke-linecap="round" />
+      </svg>
+      <div id="ge-plug"></div>
+
+      <div id="ge-win">
+        <div class="ge-titlebar">
+          <span class="ge-fileicon"></span>Tableau de bord.xlsx
+          <span class="ge-chip">
+            Données du
+            <span class="ge-roll" id="ge-chip-roll" style="position: relative; display: inline-block; vertical-align: top; width: 92px; height: 40px; font-weight: 700" data-layout-allow-overflow>
+              <span class="ge-roll-in"><span style="display: block; height: 40px">31/10</span><span style="display: block; height: 40px; color: #8fd3cd">jour</span></span>
+            </span>
+          </span>
+        </div>
+        <div class="ge-tabs">
+          <div class="ge-tab" style="left: 32px">Accueil</div>
+          <div class="ge-tab" style="left: 180px">Insertion</div>
+          <div class="ge-tab" style="left: 352px; color: #05355e">Sage BI Reporting<span class="ge-underline"></span></div>
+        </div>
+        <div class="ge-toolrow">
+          <div class="ge-btn" style="left: 30px">
+            <svg viewBox="0 0 40 40">
+              <rect x="3" y="5" width="34" height="30" rx="4" fill="#ffffff" stroke="#05355e" stroke-width="3.5" />
+              <line x1="3" y1="15" x2="37" y2="15" stroke="#05355e" stroke-width="3.5" />
+              <line x1="3" y1="25" x2="37" y2="25" stroke="#05355e" stroke-width="3" />
+              <line x1="17" y1="5" x2="17" y2="35" stroke="#05355e" stroke-width="3" />
+            </svg>
+            Sélection des données
+          </div>
+          <div class="ge-btn" id="ge-btn-ref" style="left: 412px">
+            <svg viewBox="-250 -250 500 500">
+              <defs>
+                <linearGradient id="ge-go" gradientUnits="userSpaceOnUse" x1="-249" y1="0" x2="249" y2="0">
+                  <stop offset="0" stop-color="#0a4775" /><stop offset="1" stop-color="#449c98" />
+                </linearGradient>
+                <linearGradient id="ge-gm" gradientUnits="userSpaceOnUse" x1="-185" y1="0" x2="185" y2="0">
+                  <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+                </linearGradient>
+                <linearGradient id="ge-gi" gradientUnits="userSpaceOnUse" x1="-87" y1="87" x2="87" y2="-87">
+                  <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+                </linearGradient>
+              </defs>
+              <g id="ge-ref-icon">
+                <circle r="226" fill="none" stroke="url(#ge-go)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-90" />
+                <circle r="162" fill="none" stroke="url(#ge-gm)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="0" />
+                <circle r="98.5" fill="none" stroke="url(#ge-gi)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-270" />
+              </g>
+            </svg>
+            Actualiser
+          </div>
+        </div>
+        <div class="ge-colhead" data-layout-ignore>
+          <div class="ge-col" style="left: 0">A</div>
+          <div class="ge-col" style="left: 167px">B</div>
+          <div class="ge-col" style="left: 334px">C</div>
+          <div class="ge-col" style="left: 501px">D</div>
+          <div class="ge-col" style="left: 668px">E</div>
+        </div>
+        <div class="ge-body"></div>
+
+        <!-- the four rows, exactly as the connexion scene leaves them (match cut) -->
+        <div id="ge-rows">
+          <div class="ge-row" style="top: 0">
+            <div class="ge-label">Chiffre d’affaires</div>
+            <div class="ge-value">1&#8239;248&nbsp;k€</div>
+          </div>
+          <div class="ge-row" style="top: 130px">
+            <div class="ge-label">Marges</div>
+            <div class="ge-value">32,4&nbsp;%</div>
+          </div>
+          <div class="ge-row" style="top: 260px">
+            <div class="ge-label">Trésorerie</div>
+            <div class="ge-value">386&nbsp;k€</div>
+          </div>
+          <div class="ge-row" style="top: 390px">
+            <div class="ge-label">Encours clients</div>
+            <div class="ge-value">214&nbsp;k€</div>
+          </div>
+        </div>
+        <div id="ge-note">Chiffres d’exemple</div>
+
+        <div id="ge-sel"></div>
+
+        <!-- dashboard tiles: each one is a selected row, rebuilt -->
+        <div class="ge-tile" id="ge-t1" style="left: 24px; top: 312px; width: 776px; height: 216px"></div>
+        <div class="ge-tile" id="ge-t3" style="left: 416px; top: 544px; width: 384px; height: 156px"></div>
+        <div class="ge-tile" id="ge-t4" style="left: 416px; top: 716px; width: 384px; height: 156px"></div>
+        <div class="ge-tile" id="ge-t4b" style="left: 416px; top: 716px; width: 384px; height: 156px"></div>
+        <div class="ge-tile" id="ge-t2" style="left: 24px; top: 544px; width: 376px; height: 328px"></div>
+
+        <div class="ge-t-label ge-in" style="left: 52px; top: 328px; font-size: 40px">Chiffre d’affaires</div>
+        <div class="ge-roll ge-in" id="ge-v1" style="left: 52px; top: 372px; width: 420px; height: 110px; font-size: 100px; line-height: 110px" data-layout-allow-overflow>
+          <div class="ge-roll-in"><div>1&#8239;248&nbsp;k€</div><div class="ge-new">1&#8239;263&nbsp;k€</div></div>
+        </div>
+        <div class="ge-t-label ge-in" style="left: 54px; top: 486px; font-size: 28px; line-height: 34px; font-weight: 400; color: #5b6b7a">Chiffres d’exemple</div>
+        <svg id="ge-spark" class="ge-in" style="position: absolute; left: 470px; top: 352px; width: 300px; height: 130px; overflow: visible" viewBox="0 0 340 150">
+          <polyline id="ge-spark-line" points="0,120 60,100 120,110 180,70 240,80 300,44 340,30" fill="none" stroke="#469d98" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100 120" stroke-dashoffset="110" />
+        </svg>
+
+        <svg id="ge-donut" class="ge-in" style="position: absolute; left: 432px; top: 566px; width: 112px; height: 112px" viewBox="-56 -56 112 112">
+          <circle r="42" fill="none" stroke="#e3e8ed" stroke-width="20" />
+          <circle id="ge-donut-arc" r="42" fill="none" stroke="#469d98" stroke-width="20" pathLength="100" stroke-dasharray="0 100" transform="rotate(-90)" />
+        </svg>
+        <div class="ge-t-label ge-in" style="left: 560px; top: 560px; font-size: 30px" data-layout-allow-overlap>Marges</div>
+        <div class="ge-roll ge-in" id="ge-v2" style="left: 560px; top: 596px; width: 220px; height: 68px; font-size: 60px; line-height: 68px" data-layout-allow-overflow>
+          <div class="ge-roll-in"><div>32,4&nbsp;%</div><div class="ge-new">32,9&nbsp;%</div></div>
+        </div>
+
+        <div class="ge-t-label ge-in" style="left: 440px; top: 744px; font-size: 30px" data-layout-allow-overlap>Trésorerie</div>
+        <div class="ge-roll ge-in" id="ge-v3" style="left: 600px; top: 734px; width: 180px; height: 54px; font-size: 46px; line-height: 54px; text-align: right" data-layout-allow-overflow>
+          <div class="ge-roll-in"><div>386&nbsp;k€</div><div class="ge-new">391&nbsp;k€</div></div>
+        </div>
+        <div class="ge-t-label ge-in" style="left: 440px; top: 816px; font-size: 30px" data-layout-allow-overlap>Encours</div>
+        <div class="ge-roll ge-in" id="ge-v4" style="left: 600px; top: 806px; width: 180px; height: 54px; font-size: 46px; line-height: 54px; text-align: right" data-layout-allow-overflow>
+          <div class="ge-roll-in"><div>214&nbsp;k€</div><div class="ge-new">208&nbsp;k€</div></div>
+        </div>
+
+        <div class="ge-t-label" id="ge-bars-label" style="left: 48px; top: 562px; font-size: 30px">CA mensuel</div>
+        <div class="ge-bar" style="left: 48px; top: 694px; height: 128px"></div>
+        <div class="ge-bar" style="left: 106px; top: 660px; height: 162px"></div>
+        <div class="ge-bar" style="left: 164px; top: 677px; height: 145px"></div>
+        <div class="ge-bar" style="left: 222px; top: 635px; height: 187px"></div>
+        <div class="ge-bar" style="left: 280px; top: 648px; height: 174px"></div>
+        <div class="ge-bar" id="ge-bar-last" style="left: 338px; top: 618px; height: 204px; background: #469d98"></div>
+        <div class="ge-month" style="left: 48px">J</div>
+        <div class="ge-month" style="left: 106px">J</div>
+        <div class="ge-month" style="left: 164px">A</div>
+        <div class="ge-month" style="left: 222px">S</div>
+        <div class="ge-month" style="left: 280px">O</div>
+        <div class="ge-month" style="left: 338px">N</div>
+      </div>
+
+      <div class="ge-packet" id="ge-p1"></div>
+      <div class="ge-packet" id="ge-p2"></div>
+      <div class="ge-packet" id="ge-p3"></div>
+      <div class="ge-packet" id="ge-p4"></div>
+
+      <svg class="cursor" id="ge-cursor" viewBox="0 0 24 24">
+        <path d="M4 2 L4 19.5 L8.6 15.2 L11.7 22 L14.6 20.7 L11.6 14 L18 14 Z" fill="#1c1c1c" stroke="#ffffff" stroke-width="1.4" stroke-linejoin="round" />
+      </svg>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const T = (abs) => abs - 22.4; // voice time → scene time
+      const tip = (x, y) => ({ x: x - 20, y: y - 10 });
+      const WX = 63; // window inner origin (abs)
+      const WY = 273;
+
+      // ---------- initial states ----------
+      gsap.set("#ge-cam", { scale: 1, transformOrigin: "588px 479px" });
+      gsap.set("#ge-cursor", tip(700, 2010));
+      gsap.set("#ge-sel", { opacity: 1, clipPath: "inset(0% 100% 100% 0%)" });
+      gsap.set([".ge-tile", ".ge-in", "#ge-bars-label", ".ge-month"], { opacity: 0 });
+      gsap.set(".ge-bar", { opacity: 0, scaleY: 0, transformOrigin: "50% 100%" });
+      gsap.set(".ge-packet", { opacity: 0, x: 525, y: -40 });
+
+      // rows → tiles: each tile starts on the rect of its row
+      const rowRect = (i) => ({ x: 10, y: 300 + i * 130, w: 814, h: 122 });
+      const tiles = [
+        { sel: "#ge-t1", row: 0, x: 24, y: 312, w: 776, h: 216 },
+        { sel: "#ge-t3", row: 1, x: 416, y: 544, w: 384, h: 156 },
+        { sel: "#ge-t4", row: 2, x: 416, y: 716, w: 384, h: 156 },
+        { sel: "#ge-t4b", row: 3, x: 416, y: 716, w: 384, h: 156 },
+      ];
+      tiles.forEach((t) => {
+        const r = rowRect(t.row);
+        gsap.set(t.sel, { x: r.x - t.x, y: r.y - t.y, scaleX: r.w / t.w, scaleY: r.h / t.h, transformOrigin: "0% 0%" });
+      });
+
+      // ---------- "sélectionner vos données" (23.25) ----------
+      tl.fromTo("#ge-cursor", tip(700, 2010), { ...tip(WX + 22, WY + 312), duration: 0.65, ease: "power3.out", immediateRender: false }, 0.2);
+      const tPress = T(23.25) - 0.1;
+      tl.to("#ge-cursor", { scale: 0.84, duration: 0.1, ease: "power2.in", transformOrigin: "17% 8%" }, tPress);
+      tl.to("#ge-cursor", { ...tip(WX + 816, WY + 806), duration: 0.9, ease: "power2.inOut" }, tPress + 0.1);
+      tl.to("#ge-sel", { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "power2.inOut" }, tPress + 0.1);
+      tl.to("#ge-cursor", { scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "17% 8%" }, tPress + 1.0);
+
+      // ---------- "construire vos indicateurs" (24.61): a click rebuilds the rows as tiles ----------
+      const tClick1 = T(24.45);
+      tl.to("#ge-cursor", { scale: 0.84, duration: 0.1, ease: "power2.in", transformOrigin: "17% 8%" }, tClick1);
+      tl.to("#ge-cursor", { scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "17% 8%" }, tClick1 + 0.1);
+      const tMorph = tClick1 + 0.1;
+      tl.to("#ge-sel", { opacity: 0, duration: 0.25, ease: "power2.out" }, tMorph);
+      tl.to(["#ge-rows .ge-label", "#ge-rows .ge-value", "#ge-note"], { opacity: 0, filter: "blur(6px)", duration: 0.15, ease: "power2.in" }, tMorph);
+      tiles.forEach((t, i) => {
+        tl.set(t.sel, { opacity: 1 }, tMorph);
+        tl.to(t.sel, { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 0.7, ease: "power3.inOut" }, tMorph + i * 0.06);
+      });
+      tl.to("#ge-cursor", { ...tip(1250, 1180), duration: 0.55, ease: "power2.in" }, tMorph + 0.15); // leaves the frame
+      gsap.utils.toArray(".ge-in").forEach((el, i) => {
+        if (el.id === "ge-spark" || el.id === "ge-donut") return;
+        tl.fromTo(
+          el,
+          { opacity: 0, filter: "blur(6px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out", immediateRender: false },
+          tMorph + 0.62 + i * 0.067,
+        );
+      });
+
+      // ---------- "et vos graphiques" (26.21) ----------
+      const tCharts = T(26.21);
+      tl.set("#ge-t2", { opacity: 1, clipPath: "inset(100% 0% 0% 0%)" }, tCharts - 0.08);
+      tl.to("#ge-t2", { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.out" }, tCharts - 0.08);
+      tl.fromTo("#ge-bars-label", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out", immediateRender: false }, tCharts + 0.12);
+      gsap.utils.toArray(".ge-bar").forEach((el, i) => {
+        tl.set(el, { opacity: 1 }, tCharts + 0.12 + i * 0.07);
+        tl.to(el, { scaleY: 1, duration: 0.6, ease: "expo.out" }, tCharts + 0.12 + i * 0.07);
+      });
+      tl.to(".ge-month", { opacity: 1, duration: 0.2, ease: "none" }, tCharts + 0.2);
+      tl.set(["#ge-spark", "#ge-donut"], { opacity: 1 }, tCharts);
+      tl.to("#ge-spark-line", { attr: { "stroke-dashoffset": 0 }, duration: 0.6, ease: "power2.inOut" }, tCharts + 0.05);
+      tl.to("#ge-donut-arc", { attr: { "stroke-dasharray": "32.4 100" }, duration: 0.7, ease: "power2.inOut" }, tCharts + 0.1);
+
+      // ---------- "puis d'actualiser" (27.98): back to the button, the camera leans in ----------
+      tl.fromTo("#ge-cursor", tip(820, 2010), { ...tip(588, 479), duration: 0.8, ease: "power3.out", immediateRender: false }, T(27.6)); // re-enters from below
+      tl.to("#ge-cam", { scale: 1.4, duration: 0.9, ease: "power2.inOut" }, T(27.9));
+
+      // ---------- "en un clic" (29.77): the click spins the arcs ----------
+      const tClick2 = T(29.7);
+      tl.to("#ge-cursor", { scale: 0.84, duration: 0.1, ease: "power2.in", transformOrigin: "17% 8%" }, tClick2 - 0.1);
+      tl.to("#ge-btn-ref", { scale: 0.94, duration: 0.1, ease: "power2.in" }, tClick2 - 0.1);
+      tl.to("#ge-cursor", { scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "17% 8%" }, tClick2);
+      tl.to("#ge-btn-ref", { scale: 1, duration: 0.22, ease: "power2.out" }, tClick2);
+      tl.fromTo("#ge-ref-icon", { rotation: 0, svgOrigin: "0 0" }, { rotation: 360, svgOrigin: "0 0", duration: 0.7, ease: "power2.inOut", immediateRender: false }, tClick2);
+
+      // pull back; fresh data runs down from Sage into every value
+      tl.to("#ge-cam", { scale: 1, duration: 0.8, ease: "power2.inOut" }, T(30.3));
+      tl.to("#ge-cursor", { ...tip(1240, 1560), duration: 0.6, ease: "power2.in" }, T(30.35));
+      const targets = [
+        { pk: "#ge-p1", roll: "#ge-v1", x: WX + 242, y: WY + 427, h: 110 },
+        { pk: "#ge-p2", roll: "#ge-v2", x: WX + 640, y: WY + 630, h: 68 },
+        { pk: "#ge-p3", roll: "#ge-v3", x: WX + 690, y: WY + 761, h: 54 },
+        { pk: "#ge-p4", roll: "#ge-v4", x: WX + 690, y: WY + 833, h: 54 },
+      ];
+      targets.forEach((t, i) => {
+        const t0 = T(30.35) + i * 0.08;
+        tl.set(t.pk, { opacity: 1, x: 525, y: -40 }, t0);
+        tl.to(t.pk, { y: 245, duration: 0.3, ease: "power2.in" }, t0);
+        tl.to(t.pk, { x: t.x - 15, y: t.y - 15, duration: 0.3, ease: "power2.out" }, t0 + 0.3);
+        tl.set(t.pk, { opacity: 0 }, t0 + 0.6);
+        tl.to(t.roll + " .ge-roll-in", { y: -t.h, duration: 0.5, ease: "power3.inOut" }, t0 + 0.6);
+      });
+      tl.to("#ge-bar-last", { scaleY: 1.075, duration: 0.5, ease: "power3.inOut" }, T(30.35) + 0.66);
+      tl.to("#ge-chip-roll .ge-roll-in", { y: -40, duration: 0.45, ease: "power3.inOut" }, T(30.35) + 0.9);
+
+      tl.set({}, {}, 11.15);
+      window.__timelines["gestes"] = tl;
+    })();
+  </script>
+</template>

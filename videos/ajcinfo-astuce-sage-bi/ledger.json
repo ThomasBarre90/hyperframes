@@ -1,0 +1,50 @@
+{
+  "fps": 30,
+  "current": "UP (the camera descends one sheet)",
+  "seams": [
+    {
+      "id": "hook→question",
+      "cut": 3.7,
+      "technique": "cut-the-curve UP",
+      "exit": { "selector": "#hook", "axis": "y", "dir": -1 },
+      "entry": { "selector": "#question", "axis": "y", "dir": -1 }
+    },
+    {
+      "id": "question→connexion",
+      "cut": 11.8,
+      "technique": "cut-the-curve UP",
+      "exit": { "selector": "#question", "axis": "y", "dir": -1 },
+      "entry": { "selector": "#connexion", "axis": "y", "dir": -1 }
+    },
+    {
+      "id": "connexion→gestes (rows carried)",
+      "cut": 22.4,
+      "type": "match-cut",
+      "exit": { "selector": "#connexion" },
+      "entry": { "selector": "#gestes" },
+      "carrier": { "out": "#cx-rows", "in": "#ge-rows" }
+    },
+    {
+      "id": "gestes→resultat",
+      "cut": 33.55,
+      "technique": "inverse zoom-through (arrival)",
+      "blur": 18,
+      "exit": { "selector": "#gestes", "axis": "z", "dir": -1 },
+      "entry": { "selector": "#resultat", "axis": "z", "dir": -1, "scanRoot": "#resultat" }
+    },
+    {
+      "id": "resultat→benefices",
+      "cut": 39.85,
+      "technique": "cut-the-curve UP",
+      "exit": { "selector": "#resultat", "axis": "y", "dir": -1 },
+      "entry": { "selector": "#benefices", "axis": "y", "dir": -1 }
+    },
+    {
+      "id": "benefices→pilotage",
+      "cut": 46.55,
+      "technique": "cut-the-curve UP",
+      "exit": { "selector": "#benefices", "axis": "y", "dir": -1 },
+      "entry": { "selector": "#pilotage", "axis": "y", "dir": -1 }
+    }
+  ]
+}

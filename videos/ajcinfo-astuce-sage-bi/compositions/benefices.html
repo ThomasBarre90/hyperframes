@@ -1,0 +1,186 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      color: var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    /* "Votre temps": the stopwatch as a ring whose slices change */
+    #be-ring {
+      position: absolute;
+      left: 220px;
+      top: 300px;
+      width: 640px;
+      height: 680px;
+      overflow: visible;
+    }
+    #be-center {
+      position: absolute;
+      left: 340px;
+      top: 618px;
+      width: 400px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 52px;
+    }
+    #be-slot {
+      position: absolute;
+      left: 90px;
+      top: 1010px;
+      width: 900px;
+      height: 96px;
+      overflow: hidden;
+    }
+    #be-slot-in {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    .be-line {
+      height: 96px;
+      line-height: 96px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 60px;
+      white-space: nowrap;
+    }
+    .be-sign {
+      display: inline-block;
+      width: 62px;
+      height: 62px;
+      margin-right: 18px;
+      vertical-align: -4px;
+      border: 3px solid #111111;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 56px;
+      line-height: 52px;
+      text-align: center;
+    }
+    /* the human side: the brand illustration, revealed through the ring */
+    #be-world {
+      position: absolute;
+      inset: 0;
+    }
+    #be-illu-cam {
+      position: absolute;
+      inset: 0;
+    }
+    #be-illu {
+      position: absolute;
+      left: 40px;
+      top: 190px;
+      width: 1000px;
+      height: 1000px;
+    }
+    #be-sticker {
+      position: absolute;
+      left: 120px;
+      top: 300px;
+      height: 92px;
+      padding: 0 30px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 14px;
+      box-shadow: 8px 10px 0 var(--color-teal, #469d98);
+      font-weight: 900;
+      font-size: 56px;
+      line-height: 86px;
+      white-space: nowrap;
+    }
+    #be-leader {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: visible;
+    }
+  </style>
+  <div id="root" data-composition-id="benefices" data-width="1080" data-height="1920">
+    <svg id="be-ring" data-layout-allow-overflow viewBox="-320 -340 640 680">
+      <rect x="-34" y="-338" width="68" height="34" rx="6" fill="#05355e" stroke="#111" stroke-width="3" />
+      <rect x="-12" y="-306" width="24" height="18" fill="#05355e" />
+      <circle r="290" fill="none" stroke="#111" stroke-width="3" />
+      <circle r="180" fill="#ffffff" stroke="#111" stroke-width="3" />
+      <circle r="235" fill="none" stroke="#eef1f4" stroke-width="104" />
+      <circle id="be-s-m" r="235" fill="none" stroke="#9aa6b2" stroke-width="104" pathLength="100" stroke-dasharray="44 56" stroke-dashoffset="0" transform="rotate(-90)" />
+      <circle id="be-s-e" r="235" fill="none" stroke="#05355e" stroke-width="104" pathLength="100" stroke-dasharray="24 76" stroke-dashoffset="-45" transform="rotate(-90)" />
+      <circle id="be-s-a" r="235" fill="none" stroke="#469d98" stroke-width="104" pathLength="100" stroke-dasharray="29 71" stroke-dashoffset="-70" transform="rotate(-90)" />
+    </svg>
+    <div id="be-center">Votre temps</div>
+
+    <div id="be-slot" data-layout-allow-overflow>
+      <div id="be-slot-in">
+        <div class="be-line" style="color: #5b6b7a"><span class="be-sign" style="background: #9aa6b2">−</span>Manipulations</div>
+        <div class="be-line"><span class="be-sign" style="background: #05355e">−</span>Risques d’erreurs</div>
+        <div class="be-line" style="color: #3f8f8a"><span class="be-sign" style="background: #469d98">+</span>Temps d’analyse</div>
+      </div>
+    </div>
+
+    <div id="be-world">
+      <div id="be-illu-cam">
+        <img id="be-illu" src="assets/brand/illu-gestion-39.png" alt="Illustration AJCinfo : analyser son activité, viser juste" />
+      </div>
+      <svg id="be-leader" viewBox="0 0 1080 1920">
+        <path id="be-leader-path" d="M640 392 C 690 410, 740 416, 780 414" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100 120" stroke-dashoffset="110" />
+      </svg>
+      <div id="be-sticker">Bonnes décisions</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const T = (abs) => abs - 39.85;
+
+      // slices: manipulations (m), erreurs (e), analyse (a), in % of the ring; 1-point gaps
+      const S = { m: 44, e: 24, a: 29 };
+      const draw = () => {
+        const m = S.m,
+          e = S.e,
+          a = S.a;
+        document.getElementById("be-s-m").setAttribute("stroke-dasharray", m + " " + (100 - m));
+        document.getElementById("be-s-m").setAttribute("stroke-dashoffset", "0");
+        document.getElementById("be-s-e").setAttribute("stroke-dasharray", e + " " + (100 - e));
+        document.getElementById("be-s-e").setAttribute("stroke-dashoffset", String(-(m + 1)));
+        document.getElementById("be-s-a").setAttribute("stroke-dasharray", a + " " + (100 - a));
+        document.getElementById("be-s-a").setAttribute("stroke-dashoffset", String(-(m + e + 2)));
+      };
+      draw();
+      gsap.set("#be-world", { clipPath: "circle(0px at 540px 640px)" });
+      gsap.set("#be-sticker", { opacity: 0, scale: 0.6, transformOrigin: "50% 100%" });
+      gsap.set("#be-illu", { scale: 0.86 });
+
+      // "moins de manipulations" (39.98)
+      tl.to(S, { m: 14, duration: 0.8, ease: "power3.inOut", onUpdate: draw }, T(40.05));
+      // "moins de risques d'erreurs" (41.27)
+      tl.to("#be-slot-in", { y: -96, duration: 0.4, ease: "power3.inOut" }, T(41.2));
+      tl.to(S, { e: 8, duration: 0.8, ease: "power3.inOut", onUpdate: draw }, T(41.3));
+      // "plus de temps pour analyser" (42.68): analysis takes the freed time
+      tl.to("#be-slot-in", { y: -192, duration: 0.4, ease: "power3.inOut" }, T(42.6));
+      tl.to(S, { a: 76, duration: 0.9, ease: "power3.inOut", onUpdate: draw }, T(42.7));
+
+      // "analyser votre activité" (43.61): push through the ring into the human side
+      const tI = T(43.62);
+      tl.to("#be-center", { opacity: 0, duration: 0.15, ease: "power2.in" }, tI);
+      tl.to("#be-ring", { scale: 7.5, filter: "blur(10px)", transformOrigin: "50% 50.5%", duration: 0.65, ease: "power3.in" }, tI);
+      tl.to("#be-ring", { opacity: 0, duration: 0.65, ease: "power2.in" }, tI); // the ground shows through, so the ring must go
+      tl.to("#be-slot", { y: 260, opacity: 0, duration: 0.4, ease: "power3.in" }, tI);
+      tl.to("#be-world", { clipPath: "circle(1400px at 540px 640px)", duration: 0.65, ease: "power3.in" }, tI);
+      tl.fromTo("#be-illu", { scale: 0.86 }, { scale: 1, duration: 1.2, ease: "expo.out", immediateRender: false }, tI + 0.2); // keeps the push going
+
+      // "votre activité … prendre" (44.4 → 45.3): the camera aims at the target
+      tl.fromTo("#be-illu-cam", { scale: 1 }, { scale: 1.12, transformOrigin: "800px 412px", duration: 0.9, ease: "power2.inOut", immediateRender: false }, T(44.4));
+      // "les bonnes décisions" (45.06)
+      tl.to("#be-sticker", { opacity: 1, scale: 1, duration: 0.36, ease: "back.out(1.6)" }, T(45.06));
+      tl.to("#be-leader-path", { attr: { "stroke-dashoffset": 0 }, duration: 0.35, ease: "power2.out" }, T(45.06) + 0.15);
+
+      tl.set({}, {}, 6.7);
+      window.__timelines["benefices"] = tl;
+    })();
+  </script>
+</template>

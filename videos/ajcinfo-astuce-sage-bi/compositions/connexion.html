@@ -1,0 +1,471 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      color: var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    #cx-cam {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 2600px;
+    }
+    #cx-sage {
+      position: absolute;
+      left: 380px;
+      top: 186px;
+      width: 320px;
+      height: 330px;
+      overflow: visible;
+    }
+    #cx-cable {
+      position: absolute;
+      left: 500px;
+      top: 470px;
+      width: 80px;
+      height: 440px;
+      overflow: visible;
+    }
+    #cx-plug {
+      position: absolute;
+      left: 512px;
+      top: 866px;
+      width: 56px;
+      height: 32px;
+      background: var(--color-navy, #05355e);
+      border: 3px solid #111111;
+      border-radius: 6px;
+    }
+    #cx-badge {
+      position: absolute;
+      left: 290px;
+      top: 560px;
+      width: 500px;
+      height: 80px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 14px;
+      box-shadow: 8px 10px 0 var(--color-teal, #469d98);
+      font-weight: 900;
+      font-size: 38px;
+      line-height: 74px;
+      text-align: center;
+      padding-left: 56px;
+      white-space: nowrap;
+    }
+    #cx-badge svg {
+      position: absolute;
+      left: 28px;
+      top: 13px;
+      width: 48px;
+      height: 48px;
+    }
+    .cx-packet {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      background: var(--color-teal, #469d98);
+      border: 3px solid #111111;
+      border-radius: 7px;
+    }
+    /* the workbook, same as in the other scenes */
+    #cx-win {
+      position: absolute;
+      left: 60px;
+      top: 900px;
+      width: 840px;
+      height: 1500px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 22px;
+      box-shadow: 10px 12px 0 var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    .cx-titlebar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 84px;
+      background: var(--color-navy, #05355e);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 34px;
+      line-height: 84px;
+      padding-left: 92px;
+    }
+    .cx-fileicon {
+      position: absolute;
+      left: 30px;
+      top: 21px;
+      width: 42px;
+      height: 42px;
+      border: 3px solid #ffffff;
+      border-radius: 8px;
+      background-image:
+        linear-gradient(#ffffff 3px, transparent 3px),
+        linear-gradient(90deg, #ffffff 3px, transparent 3px);
+      background-size:
+        100% 12px,
+        12px 100%;
+      background-position:
+        0 10px,
+        10px 0;
+    }
+    .cx-tabs {
+      position: absolute;
+      left: 0;
+      top: 84px;
+      width: 100%;
+      height: 76px;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .cx-tab {
+      position: absolute;
+      top: 0;
+      height: 76px;
+      line-height: 74px;
+      font-weight: 700;
+      font-size: 30px;
+      color: #5b6b7a;
+      white-space: nowrap;
+    }
+    .cx-underline {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--color-teal, #469d98);
+    }
+    .cx-toolrow {
+      position: absolute;
+      left: 0;
+      top: 160px;
+      width: 100%;
+      height: 92px;
+      background: #f4f6f8;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .cx-btn {
+      position: absolute;
+      top: 14px;
+      height: 64px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 58px;
+      white-space: nowrap;
+      padding: 0 20px 0 66px;
+    }
+    .cx-btn svg {
+      position: absolute;
+      left: 16px;
+      top: 9px;
+      width: 40px;
+      height: 40px;
+    }
+    .cx-titlebar .cx-chip {
+      position: absolute;
+      left: 560px;
+      top: 22px;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 700;
+      font-size: 28px;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    .cx-colhead {
+      position: absolute;
+      left: 0;
+      top: 252px;
+      width: 100%;
+      height: 44px;
+      background: #f4f6f8;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .cx-col {
+      position: absolute;
+      top: 0;
+      width: 167px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 26px;
+      color: #8a96a3;
+    }
+    .cx-body {
+      position: absolute;
+      left: 0;
+      top: 296px;
+      width: 100%;
+      height: 1198px;
+      background-image:
+        linear-gradient(#e3e8ed 2px, transparent 2px),
+        linear-gradient(90deg, #e3e8ed 2px, transparent 2px);
+      background-size:
+        100% 65px,
+        167px 100%;
+      background-position:
+        0 63px,
+        165px 0;
+    }
+    #cx-rows {
+      position: absolute;
+      left: 0;
+      top: 296px;
+      width: 834px;
+      height: 520px;
+    }
+    .cx-row {
+      position: absolute;
+      left: 0;
+      width: 834px;
+      height: 130px;
+    }
+    .cx-flash {
+      position: absolute;
+      inset: 4px 10px;
+      border-radius: 10px;
+      background: var(--color-teal, #469d98);
+      opacity: 0;
+    }
+    .cx-label {
+      position: absolute;
+      left: 34px;
+      top: 40px;
+      font-weight: 700;
+      font-size: 42px;
+      line-height: 52px;
+      white-space: nowrap;
+    }
+    .cx-value {
+      position: absolute;
+      left: 400px;
+      top: 26px;
+      width: 400px;
+      text-align: right;
+      font-weight: 900;
+      font-size: 72px;
+      line-height: 80px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    #cx-note {
+      position: absolute;
+      left: 34px;
+      top: 828px;
+      font-weight: 400;
+      font-size: 28px;
+      color: #5b6b7a;
+      white-space: nowrap;
+    }
+  </style>
+  <div id="root" data-composition-id="connexion" data-width="1080" data-height="1920">
+    <div id="cx-cam" data-layout-allow-overflow>
+      <!-- Sage: the data source (a database, labelled; no Sage logo) -->
+      <svg id="cx-sage" viewBox="0 0 320 330">
+        <path d="M20 60 L20 270 A140 42 0 0 0 300 270 L300 60 Z" fill="#05355e" stroke="#111" stroke-width="4" />
+        <path d="M20 130 A140 42 0 0 0 300 130" fill="none" stroke="#ffffff" stroke-width="5" />
+        <path d="M20 200 A140 42 0 0 0 300 200" fill="none" stroke="#ffffff" stroke-width="5" />
+        <ellipse cx="160" cy="60" rx="140" ry="42" fill="#469d98" stroke="#111" stroke-width="4" />
+        <text x="160" y="186" text-anchor="middle" font-family="Lato, sans-serif" font-weight="900" font-size="64" fill="#ffffff">Sage</text>
+      </svg>
+
+      <svg id="cx-cable" viewBox="0 0 80 440">
+        <line id="cx-cable-out" x1="40" y1="30" x2="40" y2="400" stroke="#111111" stroke-width="30" stroke-linecap="round" pathLength="100" stroke-dasharray="100 120" stroke-dashoffset="110" />
+        <line id="cx-cable-in" x1="40" y1="30" x2="40" y2="400" stroke="#05355e" stroke-width="22" stroke-linecap="round" pathLength="100" stroke-dasharray="100 120" stroke-dashoffset="110" />
+      </svg>
+      <div id="cx-plug"></div>
+
+      <div id="cx-badge">
+        <svg viewBox="-250 -250 500 500">
+          <defs>
+            <linearGradient id="cx-go" gradientUnits="userSpaceOnUse" x1="-249" y1="0" x2="249" y2="0">
+              <stop offset="0" stop-color="#0a4775" /><stop offset="1" stop-color="#449c98" />
+            </linearGradient>
+            <linearGradient id="cx-gm" gradientUnits="userSpaceOnUse" x1="-185" y1="0" x2="185" y2="0">
+              <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+            </linearGradient>
+            <linearGradient id="cx-gi" gradientUnits="userSpaceOnUse" x1="-87" y1="87" x2="87" y2="-87">
+              <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+            </linearGradient>
+          </defs>
+          <circle r="226" fill="none" stroke="url(#cx-go)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-90" />
+          <circle r="162" fill="none" stroke="url(#cx-gm)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="0" />
+          <circle r="98.5" fill="none" stroke="url(#cx-gi)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-270" />
+        </svg>
+        Sage BI Reporting
+      </div>
+
+      <div id="cx-win">
+        <div class="cx-titlebar"><span class="cx-fileicon"></span>Tableau de bord.xlsx<span class="cx-chip">Données du 31/10</span></div>
+        <div class="cx-tabs">
+          <div class="cx-tab" style="left: 32px">Accueil</div>
+          <div class="cx-tab" style="left: 180px">Insertion</div>
+          <div class="cx-tab" style="left: 352px; color: #05355e">Sage BI Reporting<span class="cx-underline"></span></div>
+        </div>
+        <div class="cx-toolrow">
+          <div class="cx-btn" style="left: 30px">
+            <svg viewBox="0 0 40 40">
+              <rect x="3" y="5" width="34" height="30" rx="4" fill="#ffffff" stroke="#05355e" stroke-width="3.5" />
+              <line x1="3" y1="15" x2="37" y2="15" stroke="#05355e" stroke-width="3.5" />
+              <line x1="3" y1="25" x2="37" y2="25" stroke="#05355e" stroke-width="3" />
+              <line x1="17" y1="5" x2="17" y2="35" stroke="#05355e" stroke-width="3" />
+            </svg>
+            Sélection des données
+          </div>
+          <div class="cx-btn" style="left: 412px">
+            <svg viewBox="-250 -250 500 500">
+              <circle r="226" fill="none" stroke="url(#cx-go)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-90" />
+              <circle r="162" fill="none" stroke="url(#cx-gm)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="0" />
+              <circle r="98.5" fill="none" stroke="url(#cx-gi)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-270" />
+            </svg>
+            Actualiser
+          </div>
+        </div>
+        <div class="cx-colhead" data-layout-ignore>
+          <div class="cx-col" style="left: 0">A</div>
+          <div class="cx-col" style="left: 167px">B</div>
+          <div class="cx-col" style="left: 334px">C</div>
+          <div class="cx-col" style="left: 501px">D</div>
+          <div class="cx-col" style="left: 668px">E</div>
+        </div>
+        <div class="cx-body"></div>
+
+        <div id="cx-rows">
+          <div class="cx-row" id="cx-r1" style="top: 0">
+            <div class="cx-flash"></div>
+            <div class="cx-label">Chiffre d’affaires</div>
+            <div class="cx-value" id="cx-v1">1&#8239;248&nbsp;k€</div>
+          </div>
+          <div class="cx-row" id="cx-r2" style="top: 130px">
+            <div class="cx-flash"></div>
+            <div class="cx-label">Marges</div>
+            <div class="cx-value" id="cx-v2">32,4&nbsp;%</div>
+          </div>
+          <div class="cx-row" id="cx-r3" style="top: 260px">
+            <div class="cx-flash"></div>
+            <div class="cx-label">Trésorerie</div>
+            <div class="cx-value" id="cx-v3">386&nbsp;k€</div>
+          </div>
+          <div class="cx-row" id="cx-r4" style="top: 390px">
+            <div class="cx-flash"></div>
+            <div class="cx-label">Encours clients</div>
+            <div class="cx-value" id="cx-v4">214&nbsp;k€</div>
+          </div>
+        </div>
+        <div id="cx-note">Chiffres d’exemple</div>
+      </div>
+
+      <div class="cx-packet" id="cx-p1"></div>
+      <div class="cx-packet" id="cx-p2"></div>
+      <div class="cx-packet" id="cx-p3"></div>
+      <div class="cx-packet" id="cx-p4"></div>
+      <div class="cx-packet" id="cx-p5"></div>
+      <div class="cx-packet" id="cx-p6"></div>
+      <div class="cx-packet" id="cx-p7"></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const T = (abs) => abs - 11.8; // voice time → scene time
+      const NNBSP = " ";
+      const NBSP = " ";
+      const fmtK = (v) => {
+        const n = Math.round(v);
+        const s = n >= 1000 ? Math.floor(n / 1000) + NNBSP + String(n % 1000).padStart(3, "0") : String(n);
+        return s + NBSP + "k€";
+      };
+      const fmtPct = (v) => v.toFixed(1).replace(".", ",") + NBSP + "%";
+
+      // initial states
+      gsap.set("#cx-cam", { y: 0 });
+      gsap.set("#cx-badge", { opacity: 0, scale: 0.6, transformOrigin: "50% 50%" });
+      gsap.set("#cx-plug", { opacity: 0, y: -30 });
+      gsap.set(".cx-packet", { opacity: 0, x: 525, y: 500 });
+      gsap.set([".cx-label", ".cx-value", "#cx-note"], { opacity: 0 });
+
+      // "la connexion" (12.57): the cable runs from Sage down to the workbook
+      const tCable = T(12.57);
+      tl.to(["#cx-cable-out", "#cx-cable-in"], { attr: { "stroke-dashoffset": 0 }, duration: 0.7, ease: "power2.inOut" }, tCable);
+      tl.to("#cx-plug", { opacity: 1, duration: 0.12, ease: "none" }, tCable + 0.6);
+
+      // "Sage BI Reporting" (13.86): the connector badge lands on the cable
+      tl.to("#cx-badge", { opacity: 1, scale: 1, duration: 0.38, ease: "back.out(1.6)" }, T(13.86) - 0.06);
+
+      // "et Excel" (14.87): the plug snaps into the workbook, which recoils
+      const tPlug = T(14.87);
+      tl.to("#cx-plug", { y: 0, duration: 0.16, ease: "power3.in" }, tPlug - 0.12);
+      tl.fromTo("#cx-win", { y: 0 }, { y: 10, duration: 0.08, ease: "power2.out", immediateRender: false }, tPlug + 0.04);
+      tl.to("#cx-win", { y: 0, duration: 0.3, ease: "power2.out" }, tPlug + 0.12);
+
+      // "instantanément" (16.09): data packets run down the cable
+      const tRun = T(16.09);
+      ["#cx-p1", "#cx-p2", "#cx-p3"].forEach((sel, i) => {
+        const t0 = tRun - 0.2 + i * 0.14;
+        tl.set(sel, { opacity: 1, x: 525, y: 505 }, t0);
+        tl.to(sel, { y: 900, duration: 0.55, ease: "power2.in" }, t0);
+        tl.set(sel, { opacity: 0 }, t0 + 0.55);
+      });
+
+      // "aux informations" (17.0 → 18.6): the camera descends from Sage to the rows
+      tl.to("#cx-cam", { y: -630, duration: 1.6, ease: "power2.inOut" }, T(17.0));
+      tl.set(["#cx-sage", "#cx-badge"], { opacity: 0 }, T(18.6)); // out of frame once the camera has descended
+
+      // the four indicators land on their words; each is carried by a packet
+      const rows = [
+        { at: 18.94, row: "#cx-r1", val: "#cx-v1", to: 1248, fmt: fmtK, pk: "#cx-p4" },
+        { at: 20.09, row: "#cx-r2", val: "#cx-v2", to: 32.4, fmt: fmtPct, pk: "#cx-p5" },
+        { at: 20.57, row: "#cx-r3", val: "#cx-v3", to: 386, fmt: fmtK, pk: "#cx-p6" },
+        { at: 21.36, row: "#cx-r4", val: "#cx-v4", to: 214, fmt: fmtK, pk: "#cx-p7" },
+      ];
+      rows.forEach((r, i) => {
+        const hit = T(r.at);
+        const targetY = 900 + 3 + 296 + i * 130 + 50; // cam coordinates of the row centre
+        tl.set(r.pk, { opacity: 1, x: 525, y: 885 }, hit - 0.34);
+        tl.to(r.pk, { x: 700, y: targetY, duration: 0.34, ease: "power2.in" }, hit - 0.34);
+        tl.set(r.pk, { opacity: 0 }, hit);
+        tl.fromTo(r.row + " .cx-flash", { opacity: 0.22 }, { opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, hit);
+        tl.fromTo(
+          r.row + " .cx-label",
+          { opacity: 0, filter: "blur(6px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power2.out", immediateRender: false },
+          hit,
+        );
+        tl.set(r.val, { opacity: 1 }, hit);
+        const counter = { v: 0 };
+        tl.fromTo(
+          counter,
+          { v: 0 },
+          {
+            v: r.to,
+            duration: 0.7,
+            ease: "power2.out",
+            immediateRender: false,
+            onUpdate: () => {
+              document.querySelector(r.val).textContent = r.fmt(counter.v);
+            },
+          },
+          hit,
+        );
+      });
+      tl.fromTo("#cx-note", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none", immediateRender: false }, T(21.6));
+
+      tl.set({}, {}, 10.6);
+      window.__timelines["connexion"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,94 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    /* Minimal gradient ground (client v4): a near-white wash with AJCinfo-coloured glows drifting slowly. */
+    #gr-base {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(172deg, #ffffff 0%, #f5fafa 52%, #eaf4f3 100%);
+    }
+    #gr-glows {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+    .gr-glow {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .gr-teal {
+      background: radial-gradient(circle closest-side, rgba(70, 157, 152, 0.42) 0%, rgba(70, 157, 152, 0.2) 45%, rgba(70, 157, 152, 0) 100%);
+    }
+    .gr-navy {
+      background: radial-gradient(circle closest-side, rgba(10, 71, 117, 0.2) 0%, rgba(10, 71, 117, 0.08) 45%, rgba(10, 71, 117, 0) 100%);
+    }
+    /* a whisper of grain so the soft gradients do not band once encoded */
+    #gr-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 1 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+    }
+  </style>
+  <div id="root" data-composition-id="ground" data-width="1080" data-height="1920">
+    <div id="gr-base" data-layout-ignore></div>
+    <div id="gr-glows" data-layout-ignore data-layout-allow-overflow>
+      <div class="gr-glow gr-teal" id="gr-g1" style="left: 280px; top: -120px; width: 1150px; height: 1150px"></div>
+      <div class="gr-glow gr-navy" id="gr-g2" style="left: -560px; top: 620px; width: 1300px; height: 1300px"></div>
+      <div class="gr-glow gr-teal" id="gr-g3" style="left: -260px; top: 1520px; width: 1150px; height: 1150px"></div>
+      <div class="gr-glow gr-navy" id="gr-g4" style="left: 480px; top: 1450px; width: 1050px; height: 1050px"></div>
+      <div class="gr-glow gr-teal" id="gr-g5" style="left: 180px; top: 2250px; width: 1150px; height: 1150px"></div>
+    </div>
+    <div id="gr-grain" data-layout-ignore></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#gr-glows", { y: 0 });
+
+      // Slow drift: each glow travels a long, eased path across the whole film (deterministic, no loops).
+      const drift = [
+        { el: "#gr-g1", path: [ { x: -140, y: 90, scale: 1.08 }, { x: 60, y: 200, scale: 0.96 }, { x: -60, y: 60, scale: 1.1 } ] },
+        { el: "#gr-g2", path: [ { x: 180, y: -80, scale: 1.1 }, { x: 60, y: 120, scale: 1.0 }, { x: 220, y: 40, scale: 1.12 } ] },
+        { el: "#gr-g3", path: [ { x: 160, y: -60, scale: 0.94 }, { x: 300, y: 80, scale: 1.08 }, { x: 120, y: -40, scale: 1.0 } ] },
+        { el: "#gr-g4", path: [ { x: -120, y: 100, scale: 1.06 }, { x: -260, y: -40, scale: 0.95 }, { x: -80, y: 60, scale: 1.1 } ] },
+        { el: "#gr-g5", path: [ { x: 140, y: -120, scale: 1.08 }, { x: -120, y: -40, scale: 1.0 }, { x: 80, y: -160, scale: 1.12 } ] },
+      ];
+      drift.forEach((d, i) => {
+        gsap.set(d.el, { x: 0, y: 0, scale: 1, transformOrigin: "50% 50%" });
+        const seg = 55 / d.path.length;
+        d.path.forEach((p, k) => {
+          tl.to(d.el, { ...p, duration: seg, ease: "sine.inOut" }, k * seg);
+        });
+      });
+
+      // The glows also descend a little with every seam (a quarter of the content's travel),
+      // so the film still reads as one camera going down.
+      let y = 0;
+      function upSeam(cut) {
+        y -= 57.6;
+        tl.to("#gr-glows", { y: y, duration: 0.34, ease: "power3.in" }, cut - 0.34);
+        y -= 48;
+        tl.to("#gr-glows", { y: y, duration: 0.42, ease: "power4.out" }, cut);
+      }
+      function pan(start, dist, dur) {
+        y -= dist;
+        tl.to("#gr-glows", { y: y, duration: dur, ease: "power2.inOut" }, start);
+      }
+      upSeam(3.7); // hook → question
+      upSeam(11.8); // question → connexion
+      pan(17.0, 157, 1.6); // connexion: camera descends from Sage to the rows
+      upSeam(39.85); // resultat → benefices
+      upSeam(46.55); // benefices → pilotage
+      tl.set({}, {}, 55);
+      window.__timelines["ground"] = tl;
+    })();
+  </script>
+</template>

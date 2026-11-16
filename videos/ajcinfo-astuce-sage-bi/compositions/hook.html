@@ -1,0 +1,103 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      color: var(--color-navy, #05355e);
+    }
+    #hk-watch {
+      position: absolute;
+      left: 250px;
+      top: 300px;
+      width: 580px;
+      height: 580px;
+      overflow: visible;
+    }
+    #hk-title {
+      position: absolute;
+      left: 0;
+      top: 930px;
+      width: 1080px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 112px;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+    #hk-badge {
+      position: absolute;
+      left: 640px;
+      top: 300px;
+      padding: 12px 26px 14px;
+      background: var(--color-navy, #05355e);
+      color: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 14px;
+      box-shadow: 8px 10px 0 var(--color-teal, #469d98);
+      font-weight: 900;
+      font-size: 60px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
+    <!-- Stopwatch made of the three AJCinfo arcs -->
+    <svg id="hk-watch" viewBox="-290 -290 580 580">
+      <defs>
+        <linearGradient id="hk-g-outer" gradientUnits="userSpaceOnUse" x1="-232" y1="0" x2="232" y2="0">
+          <stop offset="0" stop-color="#0a4775" />
+          <stop offset="1" stop-color="#449c98" />
+        </linearGradient>
+        <linearGradient id="hk-g-mid" gradientUnits="userSpaceOnUse" x1="-172" y1="0" x2="172" y2="0">
+          <stop offset="0" stop-color="#449c98" />
+          <stop offset="1" stop-color="#0a4775" />
+        </linearGradient>
+        <linearGradient id="hk-g-inner" gradientUnits="userSpaceOnUse" x1="-80" y1="80" x2="80" y2="-80">
+          <stop offset="0" stop-color="#449c98" />
+          <stop offset="1" stop-color="#0a4775" />
+        </linearGradient>
+      </defs>
+      <rect id="hk-crown" x="-34" y="-282" width="68" height="34" rx="6" fill="#05355e" stroke="#111" stroke-width="3" />
+      <rect x="-12" y="-250" width="24" height="16" fill="#05355e" />
+      <circle id="hk-pie" r="34" fill="none" stroke="#469d98" stroke-opacity="0.3" stroke-width="68" pathLength="360" stroke-dasharray="0 360" transform="rotate(-90)" />
+      <circle r="210" fill="none" stroke="url(#hk-g-outer)" stroke-width="43" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-90" />
+      <circle r="150.5" fill="none" stroke="url(#hk-g-mid)" stroke-width="43" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="0" />
+      <circle r="91.5" fill="none" stroke="url(#hk-g-inner)" stroke-width="43" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-270" />
+      <g id="hk-hand">
+        <line x1="0" y1="0" x2="0" y2="-176" stroke="#05355e" stroke-width="12" stroke-linecap="round" />
+      </g>
+      <circle r="17" fill="#05355e" stroke="#111" stroke-width="3" />
+    </svg>
+
+    <div id="hk-badge">&lt; 1 min</div>
+    <div id="hk-title">L’astuce Sage</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // hand + filling wedge: the minute the film promises
+      tl.fromTo(
+        "#hk-hand",
+        { rotation: 0, svgOrigin: "0 0" },
+        { rotation: 300, svgOrigin: "0 0", duration: 3.25, ease: "none" },
+        0.15,
+      );
+      tl.fromTo(
+        "#hk-pie",
+        { attr: { "stroke-dasharray": "0 360" } },
+        { attr: { "stroke-dasharray": "300 360" }, duration: 3.25, ease: "none" },
+        0.15,
+      );
+      // "en moins d'une minute" (2.44 s): the timer tag lands
+      tl.fromTo(
+        "#hk-badge",
+        { scale: 0.55, opacity: 0, transformOrigin: "0% 100%" },
+        { scale: 1, opacity: 1, duration: 0.38, ease: "back.out(1.6)" },
+        2.4,
+      );
+      tl.set({}, {}, 3.7);
+      window.__timelines["hook"] = tl;
+    })();
+  </script>
+</template>

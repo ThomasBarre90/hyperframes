@@ -1,0 +1,314 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      color: var(--color-navy, #05355e);
+    }
+    #re-win {
+      position: absolute;
+      left: 60px;
+      top: 270px;
+      width: 840px;
+      height: 860px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 22px;
+      box-shadow: 10px 12px 0 var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    .re-titlebar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 84px;
+      background: var(--color-navy, #05355e);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 34px;
+      line-height: 84px;
+      padding-left: 92px;
+    }
+    .re-fileicon {
+      position: absolute;
+      left: 30px;
+      top: 21px;
+      width: 42px;
+      height: 42px;
+      border: 3px solid #ffffff;
+      border-radius: 8px;
+      background-image:
+        linear-gradient(#ffffff 3px, transparent 3px),
+        linear-gradient(90deg, #ffffff 3px, transparent 3px);
+      background-size:
+        100% 12px,
+        12px 100%;
+      background-position:
+        0 10px,
+        10px 0;
+    }
+    #re-chip {
+      position: absolute;
+      left: 470px;
+      top: 16px;
+      width: 340px;
+      height: 52px;
+      background: var(--color-teal, #469d98);
+      border: 3px solid #111111;
+      border-radius: 12px;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 30px;
+    }
+    #re-chip svg {
+      position: absolute;
+      left: 12px;
+      top: 7px;
+      width: 32px;
+      height: 32px;
+      overflow: visible;
+    }
+    #re-chip-roll {
+      position: absolute;
+      left: 54px;
+      top: 0;
+      width: 276px;
+      height: 46px;
+      overflow: hidden;
+    }
+    .re-roll-in {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+    .re-roll-in > div {
+      height: 46px;
+      line-height: 46px;
+      white-space: nowrap;
+    }
+    .re-body {
+      position: absolute;
+      left: 0;
+      top: 84px;
+      width: 100%;
+      height: 770px;
+      background-image:
+        linear-gradient(#e3e8ed 2px, transparent 2px),
+        linear-gradient(90deg, #e3e8ed 2px, transparent 2px);
+      background-size:
+        100% 65px,
+        167px 100%;
+      background-position:
+        0 63px,
+        165px 0;
+    }
+    .re-tile {
+      position: absolute;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 16px;
+      box-shadow: 6px 8px 0 var(--color-navy, #05355e);
+    }
+    .re-label {
+      position: absolute;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+      white-space: nowrap;
+    }
+    .re-num {
+      position: absolute;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .re-bar {
+      position: absolute;
+      width: 40px;
+      background: var(--color-navy, #05355e);
+      border: 3px solid #111111;
+      border-radius: 6px 6px 0 0;
+    }
+    .re-month {
+      position: absolute;
+      top: 656px;
+      width: 40px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 28px;
+      color: #5b6b7a;
+    }
+    #re-fiable {
+      position: absolute;
+      left: 530px;
+      top: 116px;
+      width: 260px;
+      height: 76px;
+    }
+    #re-fiable svg {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 68px;
+      height: 68px;
+      overflow: visible;
+    }
+    #re-fiable-txt {
+      position: absolute;
+      left: 84px;
+      top: 6px;
+      font-weight: 900;
+      font-size: 52px;
+      line-height: 64px;
+      white-space: nowrap;
+    }
+    #re-gain {
+      position: absolute;
+      left: 24px;
+      top: 716px;
+      width: 776px;
+      height: 128px;
+    }
+    #re-gain svg {
+      position: absolute;
+      left: 26px;
+      top: 6px;
+      width: 116px;
+      height: 116px;
+      overflow: visible;
+    }
+    #re-gain-txt {
+      position: absolute;
+      left: 168px;
+      top: 30px;
+      font-weight: 900;
+      font-size: 58px;
+      line-height: 68px;
+      white-space: nowrap;
+    }
+  </style>
+  <div id="root" data-composition-id="resultat" data-width="1080" data-height="1920">
+    <div id="re-win">
+      <div class="re-titlebar"><span class="re-fileicon"></span>Tableau de bord.xlsx</div>
+      <div id="re-chip">
+        <svg viewBox="-250 -250 500 500">
+          <g id="re-chip-icon">
+            <circle r="226" fill="none" stroke="#ffffff" stroke-width="56" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-90" />
+            <circle r="140" fill="none" stroke="#ffffff" stroke-width="56" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="0" />
+          </g>
+        </svg>
+        <div id="re-chip-roll" data-layout-allow-overflow>
+          <div class="re-roll-in"><div>Données du jour</div><div>Toujours à jour</div></div>
+        </div>
+      </div>
+      <div class="re-body"></div>
+
+      <!-- hero: chiffre d'affaires -->
+      <div class="re-tile" style="left: 24px; top: 100px; width: 776px; height: 260px"></div>
+      <div class="re-label" style="left: 52px; top: 120px; font-size: 42px; line-height: 50px">Chiffre d’affaires</div>
+      <div class="re-num" style="left: 50px; top: 170px; font-size: 128px; line-height: 140px">1&#8239;263&nbsp;k€</div>
+      <div class="re-label" style="left: 54px; top: 312px; font-size: 28px; line-height: 34px; font-weight: 400; color: #5b6b7a">Chiffres d’exemple</div>
+      <svg style="position: absolute; left: 540px; top: 216px; width: 240px; height: 110px; overflow: visible" viewBox="0 0 340 150">
+        <polyline points="0,120 60,100 120,110 180,70 240,80 300,44 340,24" fill="none" stroke="#469d98" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <div id="re-fiable">
+        <svg viewBox="0 0 68 68">
+          <circle cx="34" cy="34" r="31" fill="#469d98" stroke="#111" stroke-width="3" />
+          <polyline id="re-check" points="19,35 30,46 50,24" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100 120" stroke-dashoffset="110" />
+        </svg>
+        <div id="re-fiable-txt">Fiables</div>
+      </div>
+
+      <!-- bars -->
+      <div class="re-tile" style="left: 24px; top: 376px; width: 376px; height: 324px"></div>
+      <div class="re-label" style="left: 48px; top: 392px; font-size: 30px">CA mensuel</div>
+      <div class="re-bar" style="left: 48px; top: 522px; height: 128px"></div>
+      <div class="re-bar" style="left: 106px; top: 488px; height: 162px"></div>
+      <div class="re-bar" style="left: 164px; top: 505px; height: 145px"></div>
+      <div class="re-bar" style="left: 222px; top: 463px; height: 187px"></div>
+      <div class="re-bar" style="left: 280px; top: 476px; height: 174px"></div>
+      <div class="re-bar" style="left: 338px; top: 431px; height: 219px; background: #469d98"></div>
+      <div class="re-month" style="left: 48px">J</div>
+      <div class="re-month" style="left: 106px">J</div>
+      <div class="re-month" style="left: 164px">A</div>
+      <div class="re-month" style="left: 222px">S</div>
+      <div class="re-month" style="left: 280px">O</div>
+      <div class="re-month" style="left: 338px">N</div>
+
+      <!-- marges -->
+      <div class="re-tile" style="left: 416px; top: 376px; width: 384px; height: 152px"></div>
+      <svg style="position: absolute; left: 432px; top: 396px; width: 112px; height: 112px" viewBox="-56 -56 112 112">
+        <circle r="42" fill="none" stroke="#e3e8ed" stroke-width="20" />
+        <circle r="42" fill="none" stroke="#469d98" stroke-width="20" pathLength="100" stroke-dasharray="32.9 100" transform="rotate(-90)" />
+      </svg>
+      <div class="re-label" style="left: 560px; top: 392px; font-size: 30px">Marges</div>
+      <div class="re-num" style="left: 560px; top: 428px; font-size: 60px; line-height: 68px">32,9&nbsp;%</div>
+
+      <!-- trésorerie / encours -->
+      <div class="re-tile" style="left: 416px; top: 544px; width: 384px; height: 156px"></div>
+      <div class="re-label" style="left: 440px; top: 572px; font-size: 30px">Trésorerie</div>
+      <div class="re-num" style="left: 600px; top: 562px; width: 180px; text-align: right; font-size: 46px; line-height: 54px">391&nbsp;k€</div>
+      <div class="re-label" style="left: 440px; top: 644px; font-size: 30px">Encours</div>
+      <div class="re-num" style="left: 600px; top: 634px; width: 180px; text-align: right; font-size: 46px; line-height: 54px">208&nbsp;k€</div>
+
+      <!-- gain de temps: the stopwatch of the opening, small -->
+      <div id="re-gain">
+        <svg viewBox="-290 -290 580 580">
+          <defs>
+            <linearGradient id="re-go" gradientUnits="userSpaceOnUse" x1="-232" y1="0" x2="232" y2="0">
+              <stop offset="0" stop-color="#0a4775" /><stop offset="1" stop-color="#449c98" />
+            </linearGradient>
+            <linearGradient id="re-gm" gradientUnits="userSpaceOnUse" x1="-172" y1="0" x2="172" y2="0">
+              <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+            </linearGradient>
+            <linearGradient id="re-gi" gradientUnits="userSpaceOnUse" x1="-80" y1="80" x2="80" y2="-80">
+              <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+            </linearGradient>
+          </defs>
+          <rect x="-34" y="-282" width="68" height="34" rx="6" fill="#05355e" stroke="#111" stroke-width="3" />
+          <rect x="-12" y="-250" width="24" height="16" fill="#05355e" />
+          <circle id="re-pie" r="34" fill="none" stroke="#469d98" stroke-opacity="0.35" stroke-width="68" pathLength="360" stroke-dasharray="0 360" transform="rotate(-90)" />
+          <circle r="210" fill="none" stroke="url(#re-go)" stroke-width="43" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-90" />
+          <circle r="150.5" fill="none" stroke="url(#re-gm)" stroke-width="43" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="0" />
+          <circle r="91.5" fill="none" stroke="url(#re-gi)" stroke-width="43" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-270" />
+          <g id="re-hand"><line x1="0" y1="0" x2="0" y2="-176" stroke="#05355e" stroke-width="14" stroke-linecap="round" /></g>
+          <circle r="20" fill="#05355e" stroke="#111" stroke-width="3" />
+        </svg>
+        <div id="re-gain-txt">Gain de temps</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const T = (abs) => abs - 33.55;
+
+      gsap.set("#re-fiable", { opacity: 0, scale: 0.6, transformOrigin: "10% 50%" });
+      gsap.set("#re-gain", { clipPath: "inset(0% 100% 0% 0%)" });
+      gsap.set("#re-gain-txt", { opacity: 0 });
+
+      // "fiables" (35.54): the numbers get their check mark
+      const tF = T(35.54);
+      tl.to("#re-fiable", { opacity: 1, scale: 1, duration: 0.36, ease: "back.out(1.6)" }, tF - 0.06);
+      tl.to("#re-check", { attr: { "stroke-dashoffset": 0 }, duration: 0.3, ease: "power2.out" }, tF + 0.12);
+
+      // "toujours à jour" (36.04): the arcs turn once, the chip says it
+      const tJ = T(36.04);
+      tl.fromTo("#re-chip-icon", { rotation: 0, svgOrigin: "0 0" }, { rotation: 360, svgOrigin: "0 0", duration: 0.7, ease: "power2.inOut", immediateRender: false }, tJ - 0.1);
+      tl.to("#re-chip-roll .re-roll-in", { y: -46, duration: 0.45, ease: "power3.inOut" }, tJ);
+
+      // "un gain de temps" (37.30): the stopwatch of the opening, run fast
+      const tG = T(37.3);
+      tl.to("#re-gain", { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "power3.out" }, tG - 0.15);
+      tl.fromTo("#re-hand", { rotation: 0, svgOrigin: "0 0" }, { rotation: 300, svgOrigin: "0 0", duration: 0.9, ease: "power2.inOut", immediateRender: false }, tG);
+      tl.fromTo("#re-pie", { attr: { "stroke-dasharray": "0 360" } }, { attr: { "stroke-dasharray": "300 360" }, duration: 0.9, ease: "power2.inOut", immediateRender: false }, tG);
+      tl.fromTo("#re-gain-txt", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out", immediateRender: false }, tG + 0.05);
+
+      tl.set({}, {}, 6.3);
+      window.__timelines["resultat"] = tl;
+    })();
+  </script>
+</template>

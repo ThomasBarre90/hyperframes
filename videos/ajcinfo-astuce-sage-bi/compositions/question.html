@@ -1,0 +1,362 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      color: var(--color-navy, #05355e);
+    }
+    /* Stylised workbook window (not a copy of Excel's interface) */
+    #qu-win {
+      position: absolute;
+      left: 60px;
+      top: 270px;
+      width: 840px;
+      height: 1500px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 22px;
+      box-shadow: 10px 12px 0 var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    .qu-titlebar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 84px;
+      background: var(--color-navy, #05355e);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 34px;
+      line-height: 84px;
+      padding-left: 92px;
+    }
+    .qu-fileicon {
+      position: absolute;
+      left: 30px;
+      top: 21px;
+      width: 42px;
+      height: 42px;
+      border: 3px solid #ffffff;
+      border-radius: 8px;
+      background-image:
+        linear-gradient(#ffffff 3px, transparent 3px),
+        linear-gradient(90deg, #ffffff 3px, transparent 3px);
+      background-size:
+        100% 12px,
+        12px 100%;
+      background-position:
+        0 10px,
+        10px 0;
+    }
+    .qu-tabs {
+      position: absolute;
+      left: 0;
+      top: 84px;
+      width: 100%;
+      height: 76px;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .qu-tab {
+      position: absolute;
+      top: 0;
+      height: 76px;
+      line-height: 74px;
+      font-weight: 700;
+      font-size: 30px;
+      color: #5b6b7a;
+      white-space: nowrap;
+    }
+    .qu-underline {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+    }
+    .qu-toolrow {
+      position: absolute;
+      left: 0;
+      top: 160px;
+      width: 100%;
+      height: 92px;
+      background: #f4f6f8;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .qu-ghost {
+      position: absolute;
+      top: 26px;
+      height: 40px;
+      border-radius: 8px;
+      background: #dfe4e9;
+    }
+    .qu-btn {
+      position: absolute;
+      top: 14px;
+      height: 64px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 58px;
+      color: var(--color-navy, #05355e);
+      white-space: nowrap;
+      padding: 0 20px 0 66px;
+    }
+    .qu-btn svg {
+      position: absolute;
+      left: 16px;
+      top: 9px;
+      width: 40px;
+      height: 40px;
+    }
+    .qu-colhead {
+      position: absolute;
+      left: 0;
+      top: 252px;
+      width: 100%;
+      height: 44px;
+      background: #f4f6f8;
+      border-bottom: 2px solid #e3e8ed;
+    }
+    .qu-col {
+      position: absolute;
+      top: 0;
+      width: 167px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 26px;
+      color: #8a96a3;
+    }
+    .qu-body {
+      position: absolute;
+      left: 0;
+      top: 296px;
+      width: 100%;
+      height: 1198px;
+      background-image:
+        linear-gradient(#e3e8ed 2px, transparent 2px),
+        linear-gradient(90deg, #e3e8ed 2px, transparent 2px);
+      background-size:
+        100% 65px,
+        167px 100%;
+      background-position:
+        0 63px,
+        165px 0;
+    }
+    .qu-ph {
+      position: absolute;
+      background: #ffffff;
+    }
+    .qu-ph svg {
+      position: absolute;
+      inset: 0;
+      overflow: visible;
+    }
+    .qu-ph-label {
+      position: absolute;
+      left: 28px;
+      top: 22px;
+      font-weight: 700;
+      font-size: 32px;
+      color: #8a96a3;
+    }
+    #qu-typed {
+      position: absolute;
+      left: 28px;
+      top: 92px;
+      height: 100px;
+      white-space: nowrap;
+      font-weight: 900;
+      font-size: 84px;
+      line-height: 100px;
+      font-variant-numeric: tabular-nums;
+      color: var(--color-navy, #05355e);
+    }
+    #qu-caret {
+      display: inline-block;
+      width: 7px;
+      height: 78px;
+      margin-left: 6px;
+      vertical-align: -8px;
+      background: var(--color-navy, #05355e);
+    }
+    .cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 120px;
+      height: 120px;
+      z-index: 20;
+      pointer-events: none;
+      filter: drop-shadow(4px 5px 0 rgba(5, 53, 94, 0.35));
+    }
+    #qu-strike {
+      position: absolute;
+      left: 16px;
+      top: 138px;
+      width: 330px;
+      height: 12px;
+      border-radius: 6px;
+      background: var(--color-navy, #05355e);
+    }
+  </style>
+  <div id="root" data-composition-id="question" data-width="1080" data-height="1920">
+    <div id="qu-win">
+      <div class="qu-titlebar"><span class="qu-fileicon"></span>Tableau de bord.xlsx</div>
+
+      <div class="qu-tabs">
+        <div class="qu-tab" id="qu-tab-home" style="left: 32px">
+          Accueil<span class="qu-underline" id="qu-ul-home" style="background: #05355e"></span>
+        </div>
+        <div class="qu-tab" style="left: 180px">Insertion</div>
+        <div class="qu-tab" id="qu-tab-sage" style="left: 352px">
+          Sage BI Reporting<span class="qu-underline" id="qu-ul-sage" style="background: #469d98"></span>
+        </div>
+      </div>
+
+      <div class="qu-toolrow">
+        <div id="qu-tools-a">
+          <div class="qu-ghost" style="left: 32px; width: 56px"></div>
+          <div class="qu-ghost" style="left: 104px; width: 56px"></div>
+          <div class="qu-ghost" style="left: 176px; width: 56px"></div>
+          <div class="qu-ghost" style="left: 268px; width: 150px"></div>
+          <div class="qu-ghost" style="left: 434px; width: 150px"></div>
+          <div class="qu-ghost" style="left: 620px; width: 96px"></div>
+        </div>
+        <div id="qu-tools-b">
+          <div class="qu-btn" id="qu-btn-sel" style="left: 30px">
+            <svg viewBox="0 0 40 40">
+              <rect x="3" y="5" width="34" height="30" rx="4" fill="#ffffff" stroke="#05355e" stroke-width="3.5" />
+              <line x1="3" y1="15" x2="37" y2="15" stroke="#05355e" stroke-width="3.5" />
+              <line x1="3" y1="25" x2="37" y2="25" stroke="#05355e" stroke-width="3" />
+              <line x1="17" y1="5" x2="17" y2="35" stroke="#05355e" stroke-width="3" />
+            </svg>
+            Sélection des données
+          </div>
+          <div class="qu-btn" id="qu-btn-ref" style="left: 412px">
+            <svg viewBox="-250 -250 500 500">
+              <defs>
+                <linearGradient id="qu-go" gradientUnits="userSpaceOnUse" x1="-249" y1="0" x2="249" y2="0">
+                  <stop offset="0" stop-color="#0a4775" /><stop offset="1" stop-color="#449c98" />
+                </linearGradient>
+                <linearGradient id="qu-gm" gradientUnits="userSpaceOnUse" x1="-185" y1="0" x2="185" y2="0">
+                  <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+                </linearGradient>
+                <linearGradient id="qu-gi" gradientUnits="userSpaceOnUse" x1="-87" y1="87" x2="87" y2="-87">
+                  <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+                </linearGradient>
+              </defs>
+              <circle r="226" fill="none" stroke="url(#qu-go)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-90" />
+              <circle r="162" fill="none" stroke="url(#qu-gm)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="0" />
+              <circle r="98.5" fill="none" stroke="url(#qu-gi)" stroke-width="48" pathLength="360" stroke-dasharray="270 90" stroke-dashoffset="-270" />
+            </svg>
+            Actualiser
+          </div>
+        </div>
+      </div>
+
+      <div class="qu-colhead" data-layout-ignore>
+        <div class="qu-col" style="left: 0">A</div>
+        <div class="qu-col" style="left: 167px">B</div>
+        <div class="qu-col" style="left: 334px">C</div>
+        <div class="qu-col" style="left: 501px">D</div>
+        <div class="qu-col" style="left: 668px">E</div>
+      </div>
+      <div class="qu-body"></div>
+
+      <!-- the dashboard to come, sketched as dashed frames -->
+      <div class="qu-ph" id="qu-ph-1" style="left: 30px; top: 316px; width: 774px; height: 230px">
+        <svg width="774" height="230"><rect x="2" y="2" width="770" height="226" rx="14" fill="none" stroke="#05355e" stroke-width="4" stroke-dasharray="16 12" /></svg>
+        <div class="qu-ph-label" id="qu-lb-1">Indicateurs</div>
+        <div id="qu-typed-wrap">
+          <div id="qu-saisie" class="qu-ph-label" style="top: 22px; left: 500px; color: #5b6b7a">Saisie manuelle</div>
+          <div id="qu-typed">
+            <span class="qu-ch">1</span><span class="qu-ch">2</span><span class="qu-ch">&#8239;</span><span class="qu-ch">4</span><span class="qu-ch">8</span><span class="qu-ch">0</span><span id="qu-caret"></span>
+          </div>
+          <div id="qu-strike"></div>
+        </div>
+      </div>
+      <div class="qu-ph" id="qu-ph-2" style="left: 30px; top: 566px; width: 372px; height: 270px">
+        <svg width="372" height="270"><rect x="2" y="2" width="368" height="266" rx="14" fill="none" stroke="#05355e" stroke-width="4" stroke-dasharray="16 12" /></svg>
+        <div class="qu-ph-label" id="qu-lb-2">Graphique</div>
+      </div>
+      <div class="qu-ph" id="qu-ph-3" style="left: 432px; top: 566px; width: 372px; height: 270px">
+        <svg width="372" height="270"><rect x="2" y="2" width="368" height="266" rx="14" fill="none" stroke="#05355e" stroke-width="4" stroke-dasharray="16 12" /></svg>
+        <div class="qu-ph-label" id="qu-lb-3">Graphique</div>
+      </div>
+    </div>
+    <svg class="cursor" id="qu-cursor" viewBox="0 0 24 24">
+      <path d="M4 2 L4 19.5 L8.6 15.2 L11.7 22 L14.6 20.7 L11.6 14 L18 14 Z" fill="#1c1c1c" stroke="#ffffff" stroke-width="1.4" stroke-linejoin="round" />
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const T = (abs) => abs - 3.7; // voice time → scene time
+
+      // initial states
+      gsap.set("#qu-ul-sage", { scaleX: 0, transformOrigin: "0% 50%" });
+      gsap.set("#qu-tools-b .qu-btn", { opacity: 0 });
+      gsap.set(["#qu-ph-1", "#qu-ph-2", "#qu-ph-3"], { clipPath: "inset(0% 100% 0% 0%)" });
+      gsap.set(["#qu-lb-1", "#qu-lb-2", "#qu-lb-3", "#qu-saisie"], { opacity: 0 });
+      gsap.set(".qu-ch", { display: "none" });
+      gsap.set("#qu-caret", { opacity: 0 });
+      gsap.set("#qu-strike", { scaleX: 0, transformOrigin: "0% 50%" });
+
+      // cursor: enters from below, its click on the add-in tab ignites the tab change
+      const tip = (x, y) => ({ x: x - 20, y: y - 10 }); // arrow tip at 17% / 8% of 120 px
+      const tTab = T(4.94);
+      tl.fromTo("#qu-cursor", tip(640, 2010), { ...tip(540, 396), duration: 0.65, ease: "power3.out", immediateRender: false }, tTab - 0.8);
+      gsap.set("#qu-cursor", tip(640, 2010));
+      tl.to("#qu-cursor", { scale: 0.84, duration: 0.1, ease: "power2.in", transformOrigin: "17% 8%" }, tTab - 0.1);
+      tl.to("#qu-cursor", { scale: 1, duration: 0.22, ease: "power2.out", transformOrigin: "17% 8%" }, tTab);
+      tl.to("#qu-cursor", { ...tip(1180, 760), duration: 0.6, ease: "power2.in" }, tTab + 0.5);
+
+      // "Sage BI Reporting" (4.94): the add-in tab becomes active
+      tl.to("#qu-ul-home", { scaleX: 0, transformOrigin: "100% 50%", duration: 0.2, ease: "power3.in" }, tTab);
+      tl.set("#qu-tab-home", { color: "#5b6b7a" }, tTab);
+      tl.set("#qu-tab-sage", { color: "#05355e" }, tTab);
+      tl.to("#qu-ul-sage", { scaleX: 1, duration: 0.32, ease: "expo.out" }, tTab);
+      tl.to("#qu-tools-a", { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, tTab);
+      tl.fromTo(
+        "#qu-tools-b .qu-btn",
+        { opacity: 0, filter: "blur(6px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power2.out", stagger: 0.07 },
+        tTab + 0.12,
+      );
+
+      // "un tableau de bord personnalisé" (7.30): the dashboard is sketched
+      const tPh = T(7.3);
+      ["#qu-ph-1", "#qu-ph-2", "#qu-ph-3"].forEach((sel, i) => {
+        tl.to(sel, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power2.inOut" }, tPh + i * 0.16);
+      });
+      ["#qu-lb-1", "#qu-lb-2", "#qu-lb-3"].forEach((sel, i) => {
+        tl.fromTo(
+          sel,
+          { opacity: 0, filter: "blur(6px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 0.13, ease: "power2.out" },
+          tPh + 0.42 + i * 0.16,
+        );
+      });
+
+      // "sans ressaisir vos données" (10.30 → 11.04): manual typing, then struck out
+      const tType = T(10.3);
+      tl.fromTo("#qu-saisie", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, tType - 0.05);
+      tl.set("#qu-caret", { opacity: 1 }, tType);
+      const chars = gsap.utils.toArray(".qu-ch");
+      chars.forEach((el, i) => tl.set(el, { display: "inline" }, tType + 0.05 + i * 0.075));
+      tl.set("#qu-caret", { opacity: 0 }, T(11.0));
+      tl.to("#qu-strike", { scaleX: 1, duration: 0.24, ease: "power3.out" }, T(11.0));
+      tl.to(["#qu-typed", "#qu-saisie"], { opacity: 0.35, duration: 0.2, ease: "power2.out" }, T(11.2));
+
+      tl.set({}, {}, 8.1);
+      window.__timelines["question"] = tl;
+    })();
+  </script>
+</template>

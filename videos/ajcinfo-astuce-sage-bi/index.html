@@ -1,0 +1,257 @@
+<!doctype html>
+<html
+  lang="fr"
+  data-resolution="portrait"
+  data-composition-variables='[
+    {"id":"color-navy","type":"color","label":"Marine (texte)","default":"#05355E"},
+    {"id":"color-teal","type":"color","label":"Turquoise (accent)","default":"#469D98"},
+    {"id":"font-display","type":"string","label":"Police","default":"Lato"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      body {
+        font-family: "Lato", sans-serif;
+      }
+      #root {
+        background: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="55"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- La feuille (fond quadrillé) qui défile pendant tout le film -->
+      <div
+        id="ground"
+        data-composition-id="ground"
+        data-composition-src="compositions/ground.html"
+        data-start="0"
+        data-duration="55"
+        data-track-index="0"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 1"
+      ></div>
+
+      <div
+        id="hook"
+        data-composition-id="hook"
+        data-composition-src="compositions/hook.html"
+        data-start="0"
+        data-duration="3.7"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 2"
+      ></div>
+
+      <div
+        id="question"
+        data-composition-id="question"
+        data-composition-src="compositions/question.html"
+        data-start="3.7"
+        data-duration="8.1"
+        data-track-index="2"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 3"
+      ></div>
+
+      <div
+        id="connexion"
+        data-composition-id="connexion"
+        data-composition-src="compositions/connexion.html"
+        data-start="11.8"
+        data-duration="10.6"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 4"
+      ></div>
+
+      <div
+        id="gestes"
+        data-composition-id="gestes"
+        data-composition-src="compositions/gestes.html"
+        data-start="22.4"
+        data-duration="11.15"
+        data-track-index="2"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 5"
+      ></div>
+
+      <div
+        id="resultat"
+        data-composition-id="resultat"
+        data-composition-src="compositions/resultat.html"
+        data-start="33.55"
+        data-duration="6.3"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 6"
+      ></div>
+
+      <div
+        id="benefices"
+        data-composition-id="benefices"
+        data-composition-src="compositions/benefices.html"
+        data-start="39.85"
+        data-duration="6.7"
+        data-track-index="2"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 7"
+      ></div>
+
+      <div
+        id="pilotage"
+        data-composition-id="pilotage"
+        data-composition-src="compositions/pilotage.html"
+        data-start="46.55"
+        data-duration="8.45"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 8"
+      ></div>
+
+      <!-- Sous-titres : texte exact du script, calé sur la voix -->
+      <div
+        id="captions"
+        data-composition-id="captions"
+        data-composition-src="compositions/captions.html"
+        data-start="0"
+        data-duration="55"
+        data-track-index="4"
+        data-track-kind="captions"
+        data-width="1080"
+        data-height="1920"
+        style="z-index: 50"
+      ></div>
+
+      <audio
+        id="voix-off"
+        src="assets/voice/voix-off.mp3"
+        data-start="0"
+        data-duration="53.39"
+        data-track-index="5"
+        data-volume="1"
+      ></audio>
+
+      <!-- musique du client : l'entrée de la partie principale (≈16.3 s du film) tombe sur la descente des données -->
+      <audio
+        id="musique"
+        src="assets/music/musique-fond.mp3"
+        data-start="0"
+        data-duration="55"
+        data-media-start="1.6"
+        data-track-index="8"
+        data-volume="0.1"
+        data-fade-in="0.4"
+        data-fade-out="2"
+      ></audio>
+
+      <!-- bruitages (bibliothèque libre de droits Pixabay, voir assets/sfx/CREDITS.md) -->
+      <audio id="sfx-pop-badge" src="assets/sfx/pop.mp3" data-start="2.46" data-duration="0.72" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-1" src="assets/sfx/whoosh-short.mp3" data-start="3.57" data-duration="0.57" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-click-tab" src="assets/sfx/click.mp3" data-start="4.86" data-duration="0.37" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-typing" src="assets/sfx/typing.mp3" data-start="10.33" data-track-index="6" data-volume="0.3" data-duration="0.75" data-fade-out="0.15"></audio>
+      <audio id="sfx-whoosh-2" src="assets/sfx/whoosh.mp3" data-start="11.67" data-duration="0.57" data-track-index="6" data-volume="0.28"></audio>
+      <audio id="sfx-pop-connector" src="assets/sfx/pop.mp3" data-start="13.86" data-duration="0.72" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-pop-row-1" src="assets/sfx/pop.mp3" data-start="18.86" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-tap-row-2" src="assets/sfx/click-soft.mp3" data-start="20.03" data-duration="0.37" data-track-index="6" data-volume="0.4"></audio>
+      <audio id="sfx-pop-row-3" src="assets/sfx/pop.mp3" data-start="20.49" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-tap-row-4" src="assets/sfx/click-soft.mp3" data-start="21.3" data-duration="0.37" data-track-index="6" data-volume="0.4"></audio>
+      <audio id="sfx-click-select" src="assets/sfx/click.mp3" data-start="23.11" data-duration="0.37" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-click-build" src="assets/sfx/click-soft.mp3" data-start="24.41" data-duration="0.37" data-track-index="6" data-volume="0.45"></audio>
+      <audio id="sfx-click-refresh" src="assets/sfx/click.mp3" data-start="29.56" data-duration="0.37" data-track-index="6" data-volume="0.5"></audio>
+      <audio id="sfx-whoosh-resultat" src="assets/sfx/whoosh-cinematic.mp3" data-start="31.08" data-duration="5.54" data-track-index="7" data-volume="0.3" data-fade-in="0.4"></audio>
+      <audio id="sfx-pop-fiables" src="assets/sfx/pop.mp3" data-start="35.51" data-duration="0.72" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-3" src="assets/sfx/whoosh-short.mp3" data-start="39.72" data-duration="0.57" data-track-index="6" data-volume="0.28"></audio>
+      <audio id="sfx-pop-decisions" src="assets/sfx/pop.mp3" data-start="45.11" data-duration="0.72" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-4" src="assets/sfx/whoosh.mp3" data-start="46.42" data-duration="0.57" data-track-index="6" data-volume="0.28"></audio>
+      <audio id="sfx-impact-logo" src="assets/sfx/impact-bass-1.mp3" data-start="52.08" data-duration="2.12" data-track-index="6" data-volume="0.45" data-fade-out="0.6"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // <seams:auto> — generated by seam-stamp.mjs from ledger.json; do not hand-edit.
+      // Regenerate: node <motion-doctrine>/scripts/seam-stamp.mjs --ledger ledger.json --write index.html
+      gsap.set("#hook", { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1, filter: "blur(0px)", transformOrigin: "50% 50%" });
+      gsap.set(["#question","#connexion","#gestes","#benefices","#pilotage"], { autoAlpha: 0, xPercent: 0, yPercent: 0, scale: 1, filter: "blur(0px)", transformOrigin: "50% 50%" });
+      gsap.set("#resultat", { autoAlpha: 0, scale: 1.25, filter: "blur(18px)", xPercent: 0, yPercent: 0, transformOrigin: "50% 50%" });
+      
+      // SEAM — hook→question : cut-the-curve UP (cut @3.7)
+      tl.to("#hook", { yPercent: -12, autoAlpha: 0, duration: 0.34, ease: "power3.in" }, 3.36);
+      tl.set("#hook", { autoAlpha: 0 }, 3.7);
+      tl.fromTo("#question", { yPercent: 10, autoAlpha: 0.35 }, { yPercent: 0, autoAlpha: 1, duration: 0.42, ease: "power4.out", immediateRender: false }, 3.7);
+      
+      // SEAM — question→connexion : cut-the-curve UP (cut @11.8)
+      tl.to("#question", { yPercent: -12, autoAlpha: 0, duration: 0.34, ease: "power3.in" }, 11.46);
+      tl.set("#question", { autoAlpha: 0 }, 11.8);
+      tl.fromTo("#connexion", { yPercent: 10, autoAlpha: 0.35 }, { yPercent: 0, autoAlpha: 1, duration: 0.42, ease: "power4.out", immediateRender: false }, 11.8);
+      
+      // SEAM — connexion→gestes (rows carried) : match-cut (cut @22.4)
+      tl.set("#connexion", { autoAlpha: 0 }, 22.4);
+      tl.set("#gestes", { autoAlpha: 1 }, 22.4);
+      // match-cut: carrier handoff is Tier-A — author it by hand and keep the carrier row in ledger.json
+      
+      // SEAM — gestes→resultat : inverse zoom-through (arrival) (cut @33.55)
+      tl.to("#gestes", { scale: 0.8, filter: "blur(18px)", duration: 0.21, ease: "power3.in" }, 33.34);
+      tl.to("#gestes", { autoAlpha: 0, duration: 0.21, ease: "none" }, 33.34);
+      tl.set("#gestes", { autoAlpha: 0 }, 33.55);
+      tl.fromTo("#resultat", { autoAlpha: 0.15, scale: 1.25, filter: "blur(18px)" }, { autoAlpha: 1, scale: 1.0, filter: "blur(0px)", duration: 0.5, ease: "expo.out", immediateRender: false }, 33.55);
+      
+      // SEAM — resultat→benefices : cut-the-curve UP (cut @39.85)
+      tl.to("#resultat", { yPercent: -12, autoAlpha: 0, duration: 0.34, ease: "power3.in" }, 39.51);
+      tl.set("#resultat", { autoAlpha: 0 }, 39.85);
+      tl.fromTo("#benefices", { yPercent: 10, autoAlpha: 0.35 }, { yPercent: 0, autoAlpha: 1, duration: 0.42, ease: "power4.out", immediateRender: false }, 39.85);
+      
+      // SEAM — benefices→pilotage : cut-the-curve UP (cut @46.55)
+      tl.to("#benefices", { yPercent: -12, autoAlpha: 0, duration: 0.34, ease: "power3.in" }, 46.21);
+      tl.set("#benefices", { autoAlpha: 0 }, 46.55);
+      tl.fromTo("#pilotage", { yPercent: 10, autoAlpha: 0.35 }, { yPercent: 0, autoAlpha: 1, duration: 0.42, ease: "power4.out", immediateRender: false }, 46.55);
+      
+      // </seams:auto>
+
+      // keep the root timeline as long as the film
+      tl.set({}, {}, 55);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

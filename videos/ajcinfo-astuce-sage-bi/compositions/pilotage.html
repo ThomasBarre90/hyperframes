@@ -1,0 +1,167 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      color: var(--color-navy, #05355e);
+      overflow: hidden;
+    }
+    #pi-svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: visible;
+    }
+    .pi-chip {
+      position: absolute;
+      top: 900px;
+      height: 76px;
+      padding: 0 24px;
+      background: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 12px;
+      box-shadow: 6px 8px 0 var(--color-navy, #05355e);
+      font-weight: 900;
+      font-size: 44px;
+      line-height: 70px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    #pi-claim {
+      position: absolute;
+      left: 0;
+      top: 950px;
+      width: 1080px;
+      text-align: center;
+      font-weight: 900;
+    }
+    #pi-claim .l1 {
+      font-size: 64px;
+      line-height: 76px;
+    }
+    #pi-claim .l2 {
+      font-size: 100px;
+      line-height: 112px;
+      color: var(--color-teal, #469d98);
+    }
+    .pi-w {
+      display: inline-block;
+    }
+    #pi-logo {
+      position: absolute;
+      left: 190px;
+      top: 649px;
+      width: 700px;
+      height: 222.85px;
+    }
+  </style>
+  <div id="root" data-composition-id="pilotage" data-width="1080" data-height="1920">
+    <svg id="pi-svg" viewBox="0 0 1080 1920">
+      <defs>
+        <linearGradient id="pi-go" gradientUnits="userSpaceOnUse" x1="-330" y1="0" x2="330" y2="0">
+          <stop offset="0" stop-color="#0a4775" /><stop offset="1" stop-color="#449c98" />
+        </linearGradient>
+        <linearGradient id="pi-gm" gradientUnits="userSpaceOnUse" x1="-246" y1="0" x2="246" y2="0">
+          <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+        </linearGradient>
+        <linearGradient id="pi-gi" gradientUnits="userSpaceOnUse" x1="-116" y1="116" x2="116" y2="-116">
+          <stop offset="0" stop-color="#449c98" /><stop offset="1" stop-color="#0a4775" />
+        </linearGradient>
+      </defs>
+      <!-- the gauge is the outer AJCinfo arc; the two others wait to be drawn -->
+      <g id="pi-mark" transform="translate(540 760) scale(1)">
+        <circle id="pi-arc-o" r="300" fill="none" stroke="url(#pi-go)" stroke-width="61" pathLength="360" stroke-dasharray="180 180" stroke-dashoffset="-180" />
+        <circle id="pi-arc-m" r="215" fill="none" stroke="url(#pi-gm)" stroke-width="61" pathLength="360" stroke-dasharray="0 360" stroke-dashoffset="0" />
+        <circle id="pi-arc-i" r="130.8" fill="none" stroke="url(#pi-gi)" stroke-width="61" pathLength="360" stroke-dasharray="0 360" stroke-dashoffset="-270" />
+      </g>
+      <g id="pi-gauge" transform="translate(540 760)">
+        <g id="pi-ticks">
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(0)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(22.5)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(45)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(67.5)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(90)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(112.5)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(135)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(157.5)" />
+          <line class="pi-tick" x1="-352" y1="0" x2="-384" y2="0" stroke="#05355e" stroke-width="8" stroke-linecap="round" transform="rotate(180)" />
+        </g>
+        <g id="pi-needle">
+          <path d="M-16 0 L-5 -250 L5 -250 L16 0 Z" fill="#05355e" stroke="#111" stroke-width="3" stroke-linejoin="round" />
+        </g>
+        <circle id="pi-hub" r="36" fill="#05355e" stroke="#111" stroke-width="3" />
+      </g>
+    </svg>
+
+    <div class="pi-chip" id="pi-c1" style="left: 92px">1&#8239;263&nbsp;k€</div>
+    <div class="pi-chip" id="pi-c2" style="left: 412px">32,9&nbsp;%</div>
+    <div class="pi-chip" id="pi-c3" style="left: 680px">391&nbsp;k€</div>
+
+    <div id="pi-claim">
+      <div class="l1"><span class="pi-w">Un</span> <span class="pi-w">véritable</span> <span class="pi-w">outil</span></div>
+      <div class="l2"><span class="pi-w">de</span> <span class="pi-w">pilotage</span></div>
+    </div>
+
+    <img id="pi-logo" src="assets/brand/ajcinfo-logo.png" alt="AJC INFO — Gestion, cybersécurité, infrastructure IT" />
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const T = (abs) => abs - 46.55;
+
+      // initial states
+      gsap.set("#pi-needle", { rotation: -80, svgOrigin: "0 0" });
+      gsap.set(".pi-w", { opacity: 0 });
+      gsap.set("#pi-logo", { opacity: 0, clipPath: "inset(0% 68.2% 0% 0%)" });
+      gsap.set(".pi-chip", { opacity: 0 });
+
+      // "vos données" (48.29): the refreshed values arrive…
+      const tD = T(47.55); // during "Sage BI reporting", so they can be read before they are pulled in
+      ["#pi-c1", "#pi-c2", "#pi-c3"].forEach((sel, i) => {
+        tl.fromTo(sel, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "expo.out", immediateRender: false }, tD + i * 0.08);
+      });
+      // "…deviennent" (48.65): …and are pulled into the gauge's hub
+      const hubPull = { 1: { x: 323, y: -178 }, 2: { x: 34, y: -178 }, 3: { x: -240, y: -178 } }; // chip centre → hub (540, 760)
+      ["#pi-c1", "#pi-c2", "#pi-c3"].forEach((sel, i) => {
+        const p = hubPull[i + 1];
+        tl.to(sel, { x: p.x, y: p.y, scale: 0.3, opacity: 0, duration: 0.42, ease: "power3.in" }, T(48.65) + i * 0.08);
+      });
+      // the needle climbs into the teal side as the line lands on "pilotage" (50.53)
+      tl.to("#pi-needle", { rotation: 58, svgOrigin: "0 0", duration: 1.55, ease: "power3.inOut" }, T(49.0));
+      gsap.utils.toArray(".pi-tick").forEach((el, i) => {
+        tl.to(el, { attr: { stroke: "#469d98" }, duration: 0.12, ease: "none" }, T(49.0) + 0.25 + i * 0.13);
+      });
+      // the claim, word by word on the voice (it leaves when the gauge becomes the logo)
+      const words = gsap.utils.toArray(".pi-w");
+      [49.08, 49.22, 49.86, 50.21, 50.53].forEach((at, i) => {
+        tl.fromTo(
+          words[i],
+          { opacity: 0, filter: "blur(6px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power2.out", immediateRender: false },
+          T(at),
+        );
+      });
+
+      // "À bientôt" (51.15): the gauge becomes the AJCinfo mark
+      const tM = T(51.15);
+      tl.to(["#pi-ticks", "#pi-needle", "#pi-hub"], { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, tM - 0.05);
+      // the claim leaves before the logo lands: the end card carries only the logo (client's call)
+      tl.to("#pi-claim", { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power2.in" }, tM + 0.1);
+      tl.to("#pi-mark", { attr: { transform: "translate(301.2 760.4) scale(0.33847)" }, duration: 0.9, ease: "power3.inOut" }, tM);
+      tl.to("#pi-arc-o", { attr: { "stroke-dasharray": "270 90", "stroke-dashoffset": -90 }, duration: 0.9, ease: "power3.inOut" }, tM);
+      tl.to("#pi-arc-m", { attr: { "stroke-dasharray": "270 90" }, duration: 0.75, ease: "power3.inOut" }, tM + 0.12);
+      tl.to("#pi-arc-i", { attr: { "stroke-dasharray": "270 90" }, duration: 0.7, ease: "power3.inOut" }, tM + 0.2);
+      // match onto the real logo, then the name wipes in
+      const tL = tM + 0.9;
+      tl.to("#pi-logo", { opacity: 1, duration: 0.1, ease: "none" }, tL);
+      tl.to("#pi-mark", { opacity: 0, duration: 0.1, ease: "none" }, tL + 0.05);
+      tl.to("#pi-logo", { clipPath: "inset(0% 0% 0% 0%)", duration: 0.65, ease: "power3.out" }, tL + 0.08);
+
+      tl.set({}, {}, 8.45);
+      window.__timelines["pilotage"] = tl;
+    })();
+  </script>
+</template>

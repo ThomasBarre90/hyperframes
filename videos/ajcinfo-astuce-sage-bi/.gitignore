@@ -1,0 +1,4 @@
+# Client media and build output stay out of the (public) repository.
+assets/
+renders/
+.hyperframes/

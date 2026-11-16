@@ -1,0 +1,158 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-display, "Lato"), sans-serif;
+      pointer-events: none;
+    }
+    /* caption rail: inside the Shorts/Reels safe area (bottom ≤ 1248, x 48–888 → max 720 px wide, centred) */
+    .cap-g {
+      position: absolute;
+      left: 0;
+      top: 1166px;
+      width: 1080px;
+      height: 78px;
+      text-align: center;
+      overflow: visible;
+    }
+    .cap-box {
+      display: inline-block;
+      max-width: 720px;
+      padding: 8px 22px 10px;
+      background: #ffffff;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 58px;
+      color: var(--color-navy, #05355e);
+      white-space: nowrap;
+    }
+  </style>
+  <div id="root" data-composition-id="captions" data-width="1080" data-height="1920">
+    <div class="clip cap-g" id="cap-01" data-start="0.12" data-duration="0.54" data-track-index="0"><span class="cap-box" id="cap-01-box"><span class="cap-w" id="cap-01-w1">Aujourd’hui,</span></span></div>
+    <div class="clip cap-g" id="cap-02" data-start="0.68" data-duration="0.72" data-track-index="0"><span class="cap-box" id="cap-02-box"><span class="cap-w" id="cap-02-w1">je</span> <span class="cap-w" id="cap-02-w2">vous</span> <span class="cap-w" id="cap-02-w3">partage</span></span></div>
+    <div class="clip cap-g" id="cap-03" data-start="1.42" data-duration="0.85" data-track-index="0"><span class="cap-box" id="cap-03-box"><span class="cap-w" id="cap-03-w1">une</span> <span class="cap-w" id="cap-03-w2">astuce</span> <span class="cap-w" id="cap-03-w3">Sage</span></span></div>
+    <div class="clip cap-g" id="cap-04" data-start="2.29" data-duration="1.41" data-track-index="0"><span class="cap-box" id="cap-04-box"><span class="cap-w" id="cap-04-w1">en</span> <span class="cap-w" id="cap-04-w2">moins</span> <span class="cap-w" id="cap-04-w3">d’une</span> <span class="cap-w" id="cap-04-w4">minute.</span></span></div>
+    <div class="clip cap-g" id="cap-05" data-start="3.72" data-duration="1.14" data-track-index="0"><span class="cap-box" id="cap-05-box"><span class="cap-w" id="cap-05-w1">Saviez-vous</span> <span class="cap-w" id="cap-05-w2">qu’avec</span></span></div>
+    <div class="clip cap-g" id="cap-06" data-start="4.88" data-duration="1.14" data-track-index="0"><span class="cap-box" id="cap-06-box"><span class="cap-w" id="cap-06-w1">Sage</span> <span class="cap-w" id="cap-06-w2">BI</span> <span class="cap-w" id="cap-06-w3">reporting,</span></span></div>
+    <div class="clip cap-g" id="cap-07" data-start="6.04" data-duration="1.14" data-track-index="0"><span class="cap-box" id="cap-07-box"><span class="cap-w" id="cap-07-w1">il</span> <span class="cap-w" id="cap-07-w2">est</span> <span class="cap-w" id="cap-07-w3">possible</span> <span class="cap-w" id="cap-07-w4">de</span> <span class="cap-w" id="cap-07-w5">créer</span></span></div>
+    <div class="clip cap-g" id="cap-08" data-start="7.2" data-duration="0.74" data-track-index="0"><span class="cap-box" id="cap-08-box"><span class="cap-w" id="cap-08-w1">un</span> <span class="cap-w" id="cap-08-w2">tableau</span> <span class="cap-w" id="cap-08-w3">de</span> <span class="cap-w" id="cap-08-w4">bord</span></span></div>
+    <div class="clip cap-g" id="cap-09" data-start="7.96" data-duration="0.84" data-track-index="0"><span class="cap-box" id="cap-09-box"><span class="cap-w" id="cap-09-w1">personnalisé</span></span></div>
+    <div class="clip cap-g" id="cap-10" data-start="8.82" data-duration="1.4" data-track-index="0"><span class="cap-box" id="cap-10-box"><span class="cap-w" id="cap-10-w1">directement</span> <span class="cap-w" id="cap-10-w2">dans</span> <span class="cap-w" id="cap-10-w3">Excel,</span></span></div>
+    <div class="clip cap-g" id="cap-11" data-start="10.24" data-duration="0.72" data-track-index="0"><span class="cap-box" id="cap-11-box"><span class="cap-w" id="cap-11-w1">sans</span> <span class="cap-w" id="cap-11-w2">ressaisir</span></span></div>
+    <div class="clip cap-g" id="cap-12" data-start="10.98" data-duration="0.88" data-track-index="0"><span class="cap-box" id="cap-12-box"><span class="cap-w" id="cap-12-w1">vos</span> <span class="cap-w" id="cap-12-w2">données ?</span></span></div>
+    <div class="clip cap-g" id="cap-13" data-start="11.88" data-duration="1.2" data-track-index="0"><span class="cap-box" id="cap-13-box"><span class="cap-w" id="cap-13-w1">Grâce</span> <span class="cap-w" id="cap-13-w2">à</span> <span class="cap-w" id="cap-13-w3">la</span> <span class="cap-w" id="cap-13-w4">connexion</span></span></div>
+    <div class="clip cap-g" id="cap-14" data-start="13.1" data-duration="1.54" data-track-index="0"><span class="cap-box" id="cap-14-box"><span class="cap-w" id="cap-14-w1">entre</span> <span class="cap-w" id="cap-14-w2">Sage</span> <span class="cap-w" id="cap-14-w3">BI</span> <span class="cap-w" id="cap-14-w4">reporting</span></span></div>
+    <div class="clip cap-g" id="cap-15" data-start="14.66" data-duration="0.72" data-track-index="0"><span class="cap-box" id="cap-15-box"><span class="cap-w" id="cap-15-w1">et</span> <span class="cap-w" id="cap-15-w2">Excel,</span></span></div>
+    <div class="clip cap-g" id="cap-16" data-start="15.4" data-duration="1.36" data-track-index="0"><span class="cap-box" id="cap-16-box"><span class="cap-w" id="cap-16-w1">vous</span> <span class="cap-w" id="cap-16-w2">accédez</span> <span class="cap-w" id="cap-16-w3">instantanément</span></span></div>
+    <div class="clip cap-g" id="cap-17" data-start="16.78" data-duration="0.89" data-track-index="0"><span class="cap-box" id="cap-17-box"><span class="cap-w" id="cap-17-w1">aux</span> <span class="cap-w" id="cap-17-w2">informations</span></span></div>
+    <div class="clip cap-g" id="cap-18" data-start="17.69" data-duration="1.17" data-track-index="0"><span class="cap-box" id="cap-18-box"><span class="cap-w" id="cap-18-w1">dont</span> <span class="cap-w" id="cap-18-w2">vous</span> <span class="cap-w" id="cap-18-w3">avez</span> <span class="cap-w" id="cap-18-w4">besoin :</span></span></div>
+    <div class="clip cap-g" id="cap-19" data-start="18.88" data-duration="1.61" data-track-index="0"><span class="cap-box" id="cap-19-box"><span class="cap-w" id="cap-19-w1">chiffre</span> <span class="cap-w" id="cap-19-w2">d’affaires,</span> <span class="cap-w" id="cap-19-w3">marges,</span></span></div>
+    <div class="clip cap-g" id="cap-20" data-start="20.51" data-duration="0.77" data-track-index="0"><span class="cap-box" id="cap-20-box"><span class="cap-w" id="cap-20-w1">trésorerie,</span></span></div>
+    <div class="clip cap-g" id="cap-21" data-start="21.3" data-duration="1.16" data-track-index="0"><span class="cap-box" id="cap-21-box"><span class="cap-w" id="cap-21-w1">encours</span> <span class="cap-w" id="cap-21-w2">clients.</span></span></div>
+    <div class="clip cap-g" id="cap-22" data-start="22.48" data-duration="0.61" data-track-index="0"><span class="cap-box" id="cap-22-box"><span class="cap-w" id="cap-22-w1">Il</span> <span class="cap-w" id="cap-22-w2">vous</span> <span class="cap-w" id="cap-22-w3">suffit</span></span></div>
+    <div class="clip cap-g" id="cap-23" data-start="23.11" data-duration="0.71" data-track-index="0"><span class="cap-box" id="cap-23-box"><span class="cap-w" id="cap-23-w1">de</span> <span class="cap-w" id="cap-23-w2">sélectionner</span></span></div>
+    <div class="clip cap-g" id="cap-24" data-start="23.84" data-duration="0.62" data-track-index="0"><span class="cap-box" id="cap-24-box"><span class="cap-w" id="cap-24-w1">vos</span> <span class="cap-w" id="cap-24-w2">données,</span></span></div>
+    <div class="clip cap-g" id="cap-25" data-start="24.48" data-duration="0.72" data-track-index="0"><span class="cap-box" id="cap-25-box"><span class="cap-w" id="cap-25-w1">de</span> <span class="cap-w" id="cap-25-w2">construire</span></span></div>
+    <div class="clip cap-g" id="cap-26" data-start="25.22" data-duration="0.91" data-track-index="0"><span class="cap-box" id="cap-26-box"><span class="cap-w" id="cap-26-w1">vos</span> <span class="cap-w" id="cap-26-w2">indicateurs</span></span></div>
+    <div class="clip cap-g" id="cap-27" data-start="26.15" data-duration="0.84" data-track-index="0"><span class="cap-box" id="cap-27-box"><span class="cap-w" id="cap-27-w1">et</span> <span class="cap-w" id="cap-27-w2">vos</span> <span class="cap-w" id="cap-27-w3">graphiques</span></span></div>
+    <div class="clip cap-g" id="cap-28" data-start="27.01" data-duration="0.69" data-track-index="0"><span class="cap-box" id="cap-28-box"><span class="cap-w" id="cap-28-w1">dans</span> <span class="cap-w" id="cap-28-w2">Excel,</span></span></div>
+    <div class="clip cap-g" id="cap-29" data-start="27.72" data-duration="0.94" data-track-index="0"><span class="cap-box" id="cap-29-box"><span class="cap-w" id="cap-29-w1">puis</span> <span class="cap-w" id="cap-29-w2">d’actualiser</span></span></div>
+    <div class="clip cap-g" id="cap-30" data-start="28.68" data-duration="0.75" data-track-index="0"><span class="cap-box" id="cap-30-box"><span class="cap-w" id="cap-30-w1">votre</span> <span class="cap-w" id="cap-30-w2">fichier</span></span></div>
+    <div class="clip cap-g" id="cap-31" data-start="29.45" data-duration="0.65" data-track-index="0"><span class="cap-box" id="cap-31-box"><span class="cap-w" id="cap-31-w1">en</span> <span class="cap-w" id="cap-31-w2">un</span> <span class="cap-w" id="cap-31-w3">clic</span></span></div>
+    <div class="clip cap-g" id="cap-32" data-start="30.12" data-duration="0.67" data-track-index="0"><span class="cap-box" id="cap-32-box"><span class="cap-w" id="cap-32-w1">pour</span> <span class="cap-w" id="cap-32-w2">récupérer</span></span></div>
+    <div class="clip cap-g" id="cap-33" data-start="30.81" data-duration="1.37" data-track-index="0"><span class="cap-box" id="cap-33-box"><span class="cap-w" id="cap-33-w1">les</span> <span class="cap-w" id="cap-33-w2">dernières</span> <span class="cap-w" id="cap-33-w3">informations</span></span></div>
+    <div class="clip cap-g" id="cap-34" data-start="32.2" data-duration="1.38" data-track-index="0"><span class="cap-box" id="cap-34-box"><span class="cap-w" id="cap-34-w1">de</span> <span class="cap-w" id="cap-34-w2">votre</span> <span class="cap-w" id="cap-34-w3">logiciel</span> <span class="cap-w" id="cap-34-w4">Sage.</span></span></div>
+    <div class="clip cap-g" id="cap-35" data-start="33.6" data-duration="0.9" data-track-index="0"><span class="cap-box" id="cap-35-box"><span class="cap-w" id="cap-35-w1">Résultat :</span></span></div>
+    <div class="clip cap-g" id="cap-36" data-start="34.52" data-duration="0.94" data-track-index="0"><span class="cap-box" id="cap-36-box"><span class="cap-w" id="cap-36-w1">des</span> <span class="cap-w" id="cap-36-w2">tableaux</span> <span class="cap-w" id="cap-36-w3">de</span> <span class="cap-w" id="cap-36-w4">bord</span></span></div>
+    <div class="clip cap-g" id="cap-37" data-start="35.48" data-duration="0.48" data-track-index="0"><span class="cap-box" id="cap-37-box"><span class="cap-w" id="cap-37-w1">fiables,</span></span></div>
+    <div class="clip cap-g" id="cap-38" data-start="35.98" data-duration="1.04" data-track-index="0"><span class="cap-box" id="cap-38-box"><span class="cap-w" id="cap-38-w1">toujours</span> <span class="cap-w" id="cap-38-w2">à</span> <span class="cap-w" id="cap-38-w3">jour,</span></span></div>
+    <div class="clip cap-g" id="cap-39" data-start="37.04" data-duration="0.94" data-track-index="0"><span class="cap-box" id="cap-39-box"><span class="cap-w" id="cap-39-w1">et</span> <span class="cap-w" id="cap-39-w2">un</span> <span class="cap-w" id="cap-39-w3">gain</span> <span class="cap-w" id="cap-39-w4">de</span> <span class="cap-w" id="cap-39-w5">temps</span></span></div>
+    <div class="clip cap-g" id="cap-40" data-start="38" data-duration="0.77" data-track-index="0"><span class="cap-box" id="cap-40-box"><span class="cap-w" id="cap-40-w1">considérable</span></span></div>
+    <div class="clip cap-g" id="cap-41" data-start="38.79" data-duration="1.11" data-track-index="0"><span class="cap-box" id="cap-41-box"><span class="cap-w" id="cap-41-w1">sur</span> <span class="cap-w" id="cap-41-w2">vos</span> <span class="cap-w" id="cap-41-w3">reportings.</span></span></div>
+    <div class="clip cap-g" id="cap-42" data-start="39.92" data-duration="1.27" data-track-index="0"><span class="cap-box" id="cap-42-box"><span class="cap-w" id="cap-42-w1">Moins</span> <span class="cap-w" id="cap-42-w2">de</span> <span class="cap-w" id="cap-42-w3">manipulations,</span></span></div>
+    <div class="clip cap-g" id="cap-43" data-start="41.21" data-duration="1.33" data-track-index="0"><span class="cap-box" id="cap-43-box"><span class="cap-w" id="cap-43-w1">moins</span> <span class="cap-w" id="cap-43-w2">de</span> <span class="cap-w" id="cap-43-w3">risques</span> <span class="cap-w" id="cap-43-w4">d’erreurs</span></span></div>
+    <div class="clip cap-g" id="cap-44" data-start="42.56" data-duration="0.72" data-track-index="0"><span class="cap-box" id="cap-44-box"><span class="cap-w" id="cap-44-w1">et</span> <span class="cap-w" id="cap-44-w2">plus</span> <span class="cap-w" id="cap-44-w3">de</span> <span class="cap-w" id="cap-44-w4">temps</span></span></div>
+    <div class="clip cap-g" id="cap-45" data-start="43.3" data-duration="0.72" data-track-index="0"><span class="cap-box" id="cap-45-box"><span class="cap-w" id="cap-45-w1">pour</span> <span class="cap-w" id="cap-45-w2">analyser</span></span></div>
+    <div class="clip cap-g" id="cap-46" data-start="44.04" data-duration="0.84" data-track-index="0"><span class="cap-box" id="cap-46-box"><span class="cap-w" id="cap-46-w1">votre</span> <span class="cap-w" id="cap-46-w2">activité</span></span></div>
+    <div class="clip cap-g" id="cap-47" data-start="44.9" data-duration="0.46" data-track-index="0"><span class="cap-box" id="cap-47-box"><span class="cap-w" id="cap-47-w1">et</span> <span class="cap-w" id="cap-47-w2">prendre</span></span></div>
+    <div class="clip cap-g" id="cap-48" data-start="45.38" data-duration="1.2" data-track-index="0"><span class="cap-box" id="cap-48-box"><span class="cap-w" id="cap-48-w1">les</span> <span class="cap-w" id="cap-48-w2">bonnes</span> <span class="cap-w" id="cap-48-w3">décisions.</span></span></div>
+    <div class="clip cap-g" id="cap-49" data-start="46.6" data-duration="1.61" data-track-index="0"><span class="cap-box" id="cap-49-box"><span class="cap-w" id="cap-49-w1">Avec</span> <span class="cap-w" id="cap-49-w2">Sage</span> <span class="cap-w" id="cap-49-w3">BI</span> <span class="cap-w" id="cap-49-w4">reporting,</span></span></div>
+    <div class="clip cap-g" id="cap-50" data-start="48.23" data-duration="1.25" data-track-index="0"><span class="cap-box" id="cap-50-box"><span class="cap-w" id="cap-50-w1">vos</span> <span class="cap-w" id="cap-50-w2">données</span> <span class="cap-w" id="cap-50-w3">deviennent</span></span></div>
+    <div class="clip cap-g" id="cap-51" data-start="51.09" data-duration="0.88" data-track-index="0"><span class="cap-box" id="cap-51-box"><span class="cap-w" id="cap-51-w1">À</span> <span class="cap-w" id="cap-51-w2">bientôt</span> <span class="cap-w" id="cap-51-w3">pour</span> <span class="cap-w" id="cap-51-w4">une</span></span></div>
+    <div class="clip cap-g" id="cap-52" data-start="51.99" data-duration="2.53" data-track-index="0"><span class="cap-box" id="cap-52-box"><span class="cap-w" id="cap-52-w1">nouvelle</span> <span class="cap-w" id="cap-52-w2">astuce</span> <span class="cap-w" id="cap-52-w3">Sage !</span></span></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const NAVY = "#05355e";
+      const TEAL = "#3f8f8a";
+      // one group at a time; the spoken word turns teal while it is said
+      function cap(id, start, end, words) {
+        tl.fromTo("#" + id + "-box", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "power2.out", immediateRender: false }, start);
+        words.forEach((wd, i) => {
+          const el = "#" + id + "-w" + (i + 1);
+          tl.set(el, { color: TEAL }, Math.max(start, wd[0]));
+          tl.set(el, { color: NAVY }, Math.min(end - 0.05, wd[1] + 0.05));
+        });
+        tl.to("#" + id + "-box", { opacity: 0, duration: 0.1, ease: "power2.in" }, end - 0.1);
+      }
+      gsap.set(".cap-box", { opacity: 0 });
+      cap("cap-01", 0.12, 0.66, [[0.06, 0.74]]);
+      cap("cap-02", 0.68, 1.4, [[0.74, 0.85], [0.85, 1.08], [1.08, 1.48]]);
+      cap("cap-03", 1.42, 2.27, [[1.48, 1.6], [1.69, 1.99], [1.99, 2.29]]);
+      cap("cap-04", 2.29, 3.7, [[2.35, 2.44], [2.44, 2.76], [2.76, 3.07], [3.07, 3.72]]);
+      cap("cap-05", 3.72, 4.86, [[3.78, 4.42], [4.42, 4.85]]);
+      cap("cap-06", 4.88, 6.02, [[4.94, 5.12], [5.12, 5.25], [5.25, 6.01]]);
+      cap("cap-07", 6.04, 7.18, [[6.1, 6.15], [6.15, 6.32], [6.32, 6.78], [6.78, 6.89], [6.89, 7.15]]);
+      cap("cap-08", 7.2, 7.94, [[7.26, 7.3], [7.3, 7.64], [7.73, 7.75], [7.77, 7.93]]);
+      cap("cap-09", 7.96, 8.8, [[8.02, 8.88]]);
+      cap("cap-10", 8.82, 10.22, [[8.88, 9.23], [9.23, 9.97], [9.97, 10.24]]);
+      cap("cap-11", 10.24, 10.96, [[10.3, 10.49], [10.49, 11.04]]);
+      cap("cap-12", 10.98, 11.86, [[11.04, 11.22], [11.22, 11.84]]);
+      cap("cap-13", 11.88, 13.08, [[11.94, 12.26], [12.26, 12.33], [12.33, 12.43], [12.57, 13.16]]);
+      cap("cap-14", 13.1, 14.64, [[13.16, 13.48], [13.57, 13.77], [13.86, 14.01], [14.01, 14.72]]);
+      cap("cap-15", 14.66, 15.38, [[14.72, 14.87], [14.87, 15.4]]);
+      cap("cap-16", 15.4, 16.76, [[15.46, 15.64], [15.64, 16.03], [16.09, 16.84]]);
+      cap("cap-17", 16.78, 17.67, [[16.84, 17], [17.13, 17.7]]);
+      cap("cap-18", 17.69, 18.86, [[17.75, 17.97], [17.97, 18.21], [18.21, 18.44], [18.44, 18.88]]);
+      cap("cap-19", 18.88, 20.49, [[18.94, 19.33], [19.33, 19.99], [20.09, 20.48]]);
+      cap("cap-20", 20.51, 21.28, [[20.57, 21.36]]);
+      cap("cap-21", 21.3, 22.46, [[21.36, 21.93], [21.93, 22.48]]);
+      cap("cap-22", 22.48, 23.09, [[22.54, 22.59], [22.59, 22.81], [22.81, 23.03]]);
+      cap("cap-23", 23.11, 23.82, [[23.17, 23.25], [23.25, 23.9]]);
+      cap("cap-24", 23.84, 24.46, [[23.9, 24.05], [24.07, 24.48]]);
+      cap("cap-25", 24.48, 25.2, [[24.54, 24.61], [24.61, 25.28]]);
+      cap("cap-26", 25.22, 26.13, [[25.28, 25.46], [25.5, 26.19]]);
+      cap("cap-27", 26.15, 26.99, [[26.21, 26.411], [26.411, 26.611], [26.611, 27.07]]);
+      cap("cap-28", 27.01, 27.7, [[27.07, 27.34], [27.34, 27.72]]);
+      cap("cap-29", 27.72, 28.66, [[27.78, 27.98], [27.98, 28.7]]);
+      cap("cap-30", 28.68, 29.43, [[28.74, 29.05], [29.1, 29.51]]);
+      cap("cap-31", 29.45, 30.1, [[29.51, 29.61], [29.7, 29.77], [29.77, 30.12]]);
+      cap("cap-32", 30.12, 30.79, [[30.18, 30.35], [30.35, 30.87]]);
+      cap("cap-33", 30.81, 32.18, [[30.87, 31.04], [31.04, 31.56], [31.56, 32.26]]);
+      cap("cap-34", 32.2, 33.58, [[32.26, 32.37], [32.37, 32.66], [32.66, 33.12], [33.12, 33.48]]);
+      cap("cap-35", 33.6, 34.5, [[33.66, 34.52]]);
+      cap("cap-36", 34.52, 35.46, [[34.58, 34.69], [34.7, 35.07], [35.21, 35.3], [35.3, 35.5]]);
+      cap("cap-37", 35.48, 35.96, [[35.54, 36.04]]);
+      cap("cap-38", 35.98, 37.02, [[36.04, 36.65], [36.65, 36.72], [36.72, 37.04]]);
+      cap("cap-39", 37.04, 37.98, [[37.1, 37.17], [37.17, 37.3], [37.3, 37.57], [37.57, 37.59], [37.73, 38.02]]);
+      cap("cap-40", 38, 38.77, [[38.06, 38.85]]);
+      cap("cap-41", 38.79, 39.9, [[38.85, 39.05], [39.05, 39.25], [39.28, 39.92]]);
+      cap("cap-42", 39.92, 41.19, [[39.98, 40.23], [40.23, 40.35], [40.35, 41.27]]);
+      cap("cap-43", 41.21, 42.54, [[41.27, 41.52], [41.61, 41.68], [41.68, 42.08], [42.08, 42.56]]);
+      cap("cap-44", 42.56, 43.28, [[42.62, 42.68], [42.68, 42.93], [42.93, 43.05], [43.05, 43.36]]);
+      cap("cap-45", 43.3, 44.02, [[43.36, 43.61], [43.61, 44.1]]);
+      cap("cap-46", 44.04, 44.88, [[44.1, 44.41], [44.41, 44.96]]);
+      cap("cap-47", 44.9, 45.36, [[44.96, 45.06], [45.06, 45.44]]);
+      cap("cap-48", 45.38, 46.58, [[45.44, 45.6], [45.6, 45.91], [45.91, 46.6]]);
+      cap("cap-49", 46.6, 48.21, [[46.66, 46.91], [46.91, 47.14], [47.29, 47.37], [47.37, 48.2]]);
+      cap("cap-50", 48.23, 49.48, [[48.29, 48.36], [48.36, 48.65], [48.65, 49.08]]);
+      cap("cap-51", 51.09, 51.97, [[51.15, 51.22], [51.22, 51.63], [51.63, 51.87], [51.87, 52.05]]);
+      cap("cap-52", 51.99, 54.52, [[52.05, 52.51], [52.53, 52.86], [52.86, 53.32]]);
+      tl.set({}, {}, 55);
+      window.__timelines["captions"] = tl;
+    })();
+  </script>
+</template>
