@@ -17,13 +17,37 @@
     #hk-title {
       position: absolute;
       left: 0;
-      top: 930px;
+      top: 872px;
       width: 1080px;
       text-align: center;
       font-weight: 900;
       font-size: 112px;
       line-height: 1.05;
       letter-spacing: -1px;
+    }
+    #hk-logos {
+      position: absolute;
+      left: 0;
+      top: 1012px;
+      width: 1080px;
+      height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+    }
+    #hk-sage {
+      width: 176px;
+      height: 98px;
+    }
+    #hk-link {
+      width: 140px;
+      height: 46px;
+      overflow: visible;
+    }
+    #hk-xl {
+      width: 104px;
+      height: 107px;
     }
     #hk-badge {
       position: absolute;
@@ -72,6 +96,15 @@
 
     <div id="hk-badge">&lt; 1 min</div>
     <div id="hk-title">L’astuce Sage</div>
+    <div id="hk-logos">
+      <img id="hk-sage" src="assets/logos/sage-crop.svg" alt="Sage" />
+      <svg id="hk-link" viewBox="0 0 120 40">
+        <line x1="10" y1="20" x2="110" y2="20" stroke="#111111" stroke-width="16" stroke-linecap="round" />
+        <line x1="10" y1="20" x2="110" y2="20" stroke="#05355e" stroke-width="10" stroke-linecap="round" />
+        <rect id="hk-packet" x="0" y="9" width="22" height="22" rx="5" fill="#469d98" stroke="#111" stroke-width="3" />
+      </svg>
+      <img id="hk-xl" src="assets/logos/excel.svg" alt="Excel" />
+    </div>
   </div>
   <script>
     (function () {
@@ -96,6 +129,12 @@
         { scale: 1, opacity: 1, duration: 0.38, ease: "back.out(1.6)" },
         2.4,
       );
+      // the link between the two logos carries a packet, Sage → Excel, all along the hook
+      tl.fromTo("#hk-packet", { x: 4 }, { x: 94, duration: 1.1, ease: "power2.inOut", immediateRender: false }, 0.3);
+      tl.to("#hk-packet", { x: 4, duration: 0.01, ease: "none" }, 1.45);
+      tl.to("#hk-packet", { x: 94, duration: 1.1, ease: "power2.inOut" }, 1.5);
+      tl.to("#hk-packet", { x: 4, duration: 0.01, ease: "none" }, 2.65);
+      tl.to("#hk-packet", { x: 94, duration: 0.9, ease: "power2.inOut" }, 2.7);
       tl.set({}, {}, 3.7);
       window.__timelines["hook"] = tl;
     })();

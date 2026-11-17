@@ -1,4 +1,12 @@
-# REVIEW — AJCinfo · Astuce Sage BI Reporting × Excel (v4)
+# REVIEW — AJCinfo · Astuce Sage BI Reporting × Excel (v5)
+
+## v5 (client notes)
+
+- Glows: firmer cores (teal .56 → 0 at 82 %, navy .30), smaller (900–1100 px), seven faster legs instead of three.
+- Official Sage and Excel logos (theSVG, via `cdn.jsdelivr.net`, allowed on the environment): hook row
+  Sage → Excel with a packet running between them; Excel icon in every title bar (pops when Excel is named);
+  Sage logo in the add-in tab, on the database label and in the « BI Reporting » badge.
+- Kept: `duplicate_media_discovery_risk` (the Sage logo is used twice in the connexion scene, images only).
 
 ## v4 (client notes)
 

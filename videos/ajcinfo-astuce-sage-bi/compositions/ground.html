@@ -23,11 +23,12 @@
       position: absolute;
       border-radius: 50%;
     }
+    /* v5: firmer cores and shorter falloff, so the glows read as shapes rather than haze */
     .gr-teal {
-      background: radial-gradient(circle closest-side, rgba(70, 157, 152, 0.42) 0%, rgba(70, 157, 152, 0.2) 45%, rgba(70, 157, 152, 0) 100%);
+      background: radial-gradient(circle closest-side, rgba(70, 157, 152, 0.56) 0%, rgba(70, 157, 152, 0.44) 38%, rgba(70, 157, 152, 0.18) 64%, rgba(70, 157, 152, 0) 82%);
     }
     .gr-navy {
-      background: radial-gradient(circle closest-side, rgba(10, 71, 117, 0.2) 0%, rgba(10, 71, 117, 0.08) 45%, rgba(10, 71, 117, 0) 100%);
+      background: radial-gradient(circle closest-side, rgba(10, 71, 117, 0.3) 0%, rgba(10, 71, 117, 0.22) 38%, rgba(10, 71, 117, 0.08) 64%, rgba(10, 71, 117, 0) 82%);
     }
     /* a whisper of grain so the soft gradients do not band once encoded */
     #gr-grain {
@@ -40,11 +41,11 @@
   <div id="root" data-composition-id="ground" data-width="1080" data-height="1920">
     <div id="gr-base" data-layout-ignore></div>
     <div id="gr-glows" data-layout-ignore data-layout-allow-overflow>
-      <div class="gr-glow gr-teal" id="gr-g1" style="left: 280px; top: -120px; width: 1150px; height: 1150px"></div>
-      <div class="gr-glow gr-navy" id="gr-g2" style="left: -560px; top: 620px; width: 1300px; height: 1300px"></div>
-      <div class="gr-glow gr-teal" id="gr-g3" style="left: -260px; top: 1520px; width: 1150px; height: 1150px"></div>
-      <div class="gr-glow gr-navy" id="gr-g4" style="left: 480px; top: 1450px; width: 1050px; height: 1050px"></div>
-      <div class="gr-glow gr-teal" id="gr-g5" style="left: 180px; top: 2250px; width: 1150px; height: 1150px"></div>
+      <div class="gr-glow gr-teal" id="gr-g1" style="left: 360px; top: -60px; width: 980px; height: 980px"></div>
+      <div class="gr-glow gr-navy" id="gr-g2" style="left: -480px; top: 640px; width: 1100px; height: 1100px"></div>
+      <div class="gr-glow gr-teal" id="gr-g3" style="left: -200px; top: 1560px; width: 960px; height: 960px"></div>
+      <div class="gr-glow gr-navy" id="gr-g4" style="left: 560px; top: 1440px; width: 900px; height: 900px"></div>
+      <div class="gr-glow gr-teal" id="gr-g5" style="left: 220px; top: 2300px; width: 980px; height: 980px"></div>
     </div>
     <div id="gr-grain" data-layout-ignore></div>
   </div>
@@ -53,19 +54,19 @@
       const tl = gsap.timeline({ paused: true });
       gsap.set("#gr-glows", { y: 0 });
 
-      // Slow drift: each glow travels a long, eased path across the whole film (deterministic, no loops).
+      // Drift (v5: faster and wider): each glow travels seven eased legs across the film (deterministic, no loops).
       const drift = [
-        { el: "#gr-g1", path: [ { x: -140, y: 90, scale: 1.08 }, { x: 60, y: 200, scale: 0.96 }, { x: -60, y: 60, scale: 1.1 } ] },
-        { el: "#gr-g2", path: [ { x: 180, y: -80, scale: 1.1 }, { x: 60, y: 120, scale: 1.0 }, { x: 220, y: 40, scale: 1.12 } ] },
-        { el: "#gr-g3", path: [ { x: 160, y: -60, scale: 0.94 }, { x: 300, y: 80, scale: 1.08 }, { x: 120, y: -40, scale: 1.0 } ] },
-        { el: "#gr-g4", path: [ { x: -120, y: 100, scale: 1.06 }, { x: -260, y: -40, scale: 0.95 }, { x: -80, y: 60, scale: 1.1 } ] },
-        { el: "#gr-g5", path: [ { x: 140, y: -120, scale: 1.08 }, { x: -120, y: -40, scale: 1.0 }, { x: 80, y: -160, scale: 1.12 } ] },
+        { el: "#gr-g1", path: [ [-220, 160, 1.12], [120, 300, 0.92], [-160, 40, 1.15], [180, 220, 0.95], [-120, 340, 1.1], [200, 80, 0.94], [-60, 200, 1.08] ] },
+        { el: "#gr-g2", path: [ [300, -140, 1.1], [80, 200, 0.94], [360, 60, 1.14], [120, -180, 0.96], [340, 160, 1.1], [60, -40, 0.92], [260, 120, 1.12] ] },
+        { el: "#gr-g3", path: [ [260, -160, 0.92], [460, 120, 1.12], [180, -60, 0.96], [420, 200, 1.1], [220, -120, 0.94], [480, 40, 1.12], [300, -20, 1.0] ] },
+        { el: "#gr-g4", path: [ [-220, 180, 1.1], [-420, -80, 0.94], [-160, 120, 1.14], [-380, 260, 0.96], [-200, -40, 1.1], [-440, 140, 0.92], [-260, 60, 1.08] ] },
+        { el: "#gr-g5", path: [ [240, -220, 1.12], [-180, -60, 0.94], [200, -300, 1.1], [-140, -160, 0.96], [260, -80, 1.14], [-100, -260, 0.92], [120, -140, 1.06] ] },
       ];
-      drift.forEach((d, i) => {
+      drift.forEach((d) => {
         gsap.set(d.el, { x: 0, y: 0, scale: 1, transformOrigin: "50% 50%" });
         const seg = 55 / d.path.length;
         d.path.forEach((p, k) => {
-          tl.to(d.el, { ...p, duration: seg, ease: "sine.inOut" }, k * seg);
+          tl.to(d.el, { x: p[0], y: p[1], scale: p[2], duration: seg, ease: "sine.inOut" }, k * seg);
         });
       });
 

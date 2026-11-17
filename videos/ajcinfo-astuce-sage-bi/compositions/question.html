@@ -32,6 +32,20 @@
       line-height: 84px;
       padding-left: 92px;
     }
+    .qu-xl {
+      position: absolute;
+      left: 22px;
+      top: 13px;
+      width: 56px;
+      height: 58px;
+    }
+    .qu-sage {
+      display: inline-block;
+      height: 24px;
+      width: 43px;
+      margin-right: 8px;
+      vertical-align: -3px;
+    }
     .qu-fileicon {
       position: absolute;
       left: 30px;
@@ -208,7 +222,7 @@
   </style>
   <div id="root" data-composition-id="question" data-width="1080" data-height="1920">
     <div id="qu-win">
-      <div class="qu-titlebar"><span class="qu-fileicon"></span>Tableau de bord.xlsx</div>
+      <div class="qu-titlebar"><img class="qu-xl" id="qu-xl" src="assets/logos/excel.svg" alt="Excel" />Tableau de bord.xlsx</div>
 
       <div class="qu-tabs">
         <div class="qu-tab" id="qu-tab-home" style="left: 32px">
@@ -216,7 +230,7 @@
         </div>
         <div class="qu-tab" style="left: 180px">Insertion</div>
         <div class="qu-tab" id="qu-tab-sage" style="left: 352px">
-          Sage BI Reporting<span class="qu-underline" id="qu-ul-sage" style="background: #469d98"></span>
+          <img class="qu-sage" src="assets/logos/sage-crop.svg" alt="Sage" />BI Reporting<span class="qu-underline" id="qu-ul-sage" style="background: #469d98"></span>
         </div>
       </div>
 
@@ -344,6 +358,10 @@
           tPh + 0.42 + i * 0.16,
         );
       });
+
+      // "dans Excel" (9.97): the Excel icon of the window answers the word
+      tl.fromTo("#qu-xl", { scale: 1 }, { scale: 1.35, duration: 0.14, ease: "power2.out", transformOrigin: "50% 50%", immediateRender: false }, T(9.97));
+      tl.to("#qu-xl", { scale: 1, duration: 0.3, ease: "power2.inOut" }, T(9.97) + 0.14);
 
       // "sans ressaisir vos données" (10.30 → 11.04): manual typing, then struck out
       const tType = T(10.3);

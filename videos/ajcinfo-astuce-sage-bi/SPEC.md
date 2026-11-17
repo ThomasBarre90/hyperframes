@@ -19,7 +19,7 @@ fade-in 0.4 s / fade-out 2 s; its main section enters ≈ 16.3 s, on the data ru
 ## LOOK — "the world is one spreadsheet, drawn in AJCinfo's illustration style"
 
 - Ground (client v4): minimal gradient #FFFFFF → #E9F1F4 with five soft AJCinfo glows (teal rgba(70,157,152,.34),
-  navy rgba(10,71,117,.22)) drifting slowly on sine.inOut paths across the film, 5 % grain against banding.
+  navy rgba(10,71,117,.22)) drifting on seven sine.inOut legs (≈ 7.9 s each, ±120–460 px, v5: firmer cores, faster), 5 % grain against banding.
   Superseded: organic blobs #D9D9D9 at 60 % (the brand illustrations' grey shapes),
   one under each hero, scrolling with the grid. No gradients on the ground, no grain, no vignette.
 - Ink: navy #05355E (titles, numbers, fills), logo navy #074272 (arcs gradient start).
@@ -40,7 +40,7 @@ fade-in 0.4 s / fade-out 2 s; its main section enters ≈ 16.3 s, on the data ru
   the refresh icon (gestures), the "time" donut (benefits), the gauge (pilotage), then the logo.
 - **Stopwatch**: arcs at outer radius 230 px + a 60 x 34 px navy crown on top + a navy hand from the centre.
 - **Sage source**: a database cylinder of 3 stacked discs, 300 x 300 px, navy fill, 3 px black contour,
-  teal top face, label "Sage" Lato 900 54 px white on its body. Text label only: no Sage logo, no Sage green.
+  teal top face, label "Sage" Lato 900 54 px white on its body. v5: carries the official Sage logo on a white label.
 - **Connector**: a 22 px navy cable with black contour, rounded caps; badge "Sage BI Reporting" (white,
   3 px contour, radius 14, Lato 700 36 px navy, mini arcs icon 44 px) at its middle.
 - **Workbook window** (stylised, not Excel's UI): white card, 3 px contour, radius 22, navy offset shadow.
@@ -57,6 +57,13 @@ fade-in 0.4 s / fade-out 2 s; its main section enters ≈ 16.3 s, on the data ru
 - **Illustration 39** (brand file: woman with tablet inside a head of gears, target and arrow) for
   "analyser / bonnes décisions". Used as is, never redrawn.
 - **Logo**: the brand PNG (logo gestion), cropped to its bbox, never redrawn; the arcs morph lands on it.
+
+## Logos (client v5)
+
+Official marks from theSVG (`media-use resolve --type logo`), never redrawn: `assets/logos/sage-crop.svg` (Sage,
+viewBox cropped to the wordmark) and `assets/logos/excel.svg` (Microsoft Excel). Placed: hook row Sage → Excel
+under the title (frame 0), Excel icon in every workbook title bar (pops on « dans Excel » 9.97 and « et Excel »
+14.87), Sage logo in the « BI Reporting » tab, on the database and in the connector badge.
 
 ## MOTION
 
@@ -98,8 +105,7 @@ No embeds.
 Dark or navy void as ground; glow, bloom, particles; purple/blue gradients, glass; cream paper + serif;
 pill chips; everything centred-and-fading; every element sliding up; text moving while read; titles
 drifting after they land; idle wobble/breathing/floating; corner labels, frame borders, HUD decoration;
-three cards in a row; the logo docked in a corner; Excel green and Microsoft/Excel logo; Sage logo or
-Sage green; a drawn copy of the real Excel interface; red "error" colour; click rings; bounce/elastic eases;
+three cards in a row; the logo docked in a corner; a drawn copy of the real Excel interface; red "error" colour; click rings; bounce/elastic eases;
 numbers not marked as examples; a grid on the ground (client: v2); text under the end logo besides the captions (client: v2); a cursor parked at the frame edge (it leaves and re-enters).
 
 ## QA frames
